@@ -1,17 +1,23 @@
 import { useState } from 'react';
-import { BiSearch, BiMenu, BiUserCircle } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
+import { BiMenu, BiUserCircle } from 'react-icons/bi';
 import { FaUtensils } from 'react-icons/fa';
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState();
+
+  const navigate = useNavigate();
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
         {/* Logo */}
-        <div className="flex items-center">
+        <div
+          onClick={() => navigate('/')}
+          className="flex items-center cursor-pointer"
+        >
           <FaUtensils className="text-orange-500 text-3xl mr-2" />
 
-          <span className="font-bold text-xl text-gray-800 ">cookbook</span>
+          <span className="font-bold text-xl text-gray-800">cookbook</span>
         </div>
 
         {/* Menu Button */}

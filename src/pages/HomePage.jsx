@@ -1,29 +1,29 @@
 import { useState } from 'react';
+import { useGetRecipesQuery } from '../features/api/apiSlice';
 import { BiSearch } from 'react-icons/bi';
 import { FaLeaf, FaFish, FaCarrot, FaDrumstickBite } from 'react-icons/fa';
+import LoadingPage from '../components/LoadingPage';
+import RecipeCard from '../components/RecipeCard';
 
 const HomePage = () => {
+  const { data: recipes = [], isLoading, isError } = useGetRecipesQuery();
   const [category, setCategory] = useState('All');
-  const recipes = [
-    { id: 1, title: 'Vegan Salad', category: 'Vegan' },
-    { id: 2, title: 'Grilled Salmon', category: 'Fish' },
-    { id: 3, title: 'Chicken Curry', category: 'Meat' },
-    { id: 4, title: 'Vegetarian Pizza', category: 'Vegetarian' },
-    { id: 5, title: 'Fish Tacos', category: 'Fish' },
-    { id: 6, title: 'Beef Stew', category: 'Meat' },
-    { id: 7, title: 'Tofu Stir-Fry', category: 'Vegan' },
-    { id: 8, title: 'Vegetable Soup', category: 'Vegetarian' },
-  ];
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // Filter recipes by category
-  const filteredRecipes =
-    category === 'All'
-      ? recipes
-      : recipes.filter((r) => r.category === category);
+  // Filter recipes by category and search query
+  const filteredRecipes = recipes.filter((recipe) => {
+    const matchesCategory = category === 'All' || recipe.category === category;
+    const matchesSearchQuery = recipe.title
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearchQuery;
+  });
+
+  if (isLoading) return <LoadingPage />;
+  if (isError) return <div>Error fetching recipes.</div>;
 
   return (
     <div className="container mx-auto px-6 py-8">
-      {/* Search Bar */}
       {/* Search Bar */}
       <div className="flex justify-center mb-8">
         <div className="relative w-full max-w-3xl">
@@ -31,6 +31,8 @@ const HomePage = () => {
             type="text"
             placeholder="Search for a recipe..."
             className="w-full py-3 pl-12 pr-4 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
           <BiSearch className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-400 text-xl" />
         </div>
@@ -77,15 +79,15 @@ const HomePage = () => {
       </div>
 
       {/* Recipe Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredRecipes.map((recipe) => (
-          <div
+          <RecipeCard
             key={recipe.id}
-            className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition"
-          >
-            <h3 className="text-lg font-bold">{recipe.title}</h3>
-            <p className="text-sm text-gray-500">{recipe.category}</p>
-          </div>
+            title={recipe.title}
+            category={recipe.category}
+            imageUrl={recipe.imageUrl}
+            id={recipe._id}
+          />
         ))}
       </div>
     </div>

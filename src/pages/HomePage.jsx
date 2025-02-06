@@ -80,15 +80,21 @@ const HomePage = () => {
 
       {/* Recipe Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredRecipes.map((recipe) => (
-          <RecipeCard
-            key={recipe.id}
-            title={recipe.title}
-            category={recipe.category}
-            imageUrl={recipe.imageUrl}
-            id={recipe._id}
-          />
-        ))}
+        {filteredRecipes.length > 0 ? (
+          filteredRecipes.map((recipe) => (
+            <RecipeCard
+              key={recipe.id}
+              title={recipe.title}
+              category={recipe.category}
+              imageUrl={recipe.imageUrl}
+              id={recipe._id}
+            />
+          ))
+        ) : (
+          <div className="col-span-full text-center text-gray-600 text-lg">
+            No recipes found matching your search and category selection.
+          </div>
+        )}
       </div>
     </div>
   );

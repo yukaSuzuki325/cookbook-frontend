@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useGetRecipesQuery } from '../features/api/apiSlice';
+import { useGetRecipesQuery } from '../features/api/recipesApiSlice';
 import { BiSearch } from 'react-icons/bi';
 import { FaLeaf, FaFish, FaCarrot, FaDrumstickBite } from 'react-icons/fa';
 import LoadingPage from '../components/LoadingPage';
@@ -83,7 +83,7 @@ const HomePage = () => {
         {filteredRecipes.length > 0 ? (
           filteredRecipes.map((recipe) => (
             <RecipeCard
-              key={recipe.id}
+              key={recipe._id}
               title={recipe.title}
               category={recipe.category}
               imageUrl={recipe.imageUrl}
@@ -92,7 +92,7 @@ const HomePage = () => {
           ))
         ) : (
           <div className="col-span-full text-center text-gray-600 text-lg">
-            No recipes found matching your search and category selection.
+            No recipes found matching your search.
           </div>
         )}
       </div>

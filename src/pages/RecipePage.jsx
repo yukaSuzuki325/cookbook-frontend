@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useGetRecipeByIdQuery } from '../features/api/apiSlice';
+import { useGetRecipeByIdQuery } from '../features/api/recipesApiSlice';
 import LoadingPage from '../components/LoadingPage';
 import { FaClock, FaHeart, FaUsers } from 'react-icons/fa';
 import { BsShare } from 'react-icons/bs';

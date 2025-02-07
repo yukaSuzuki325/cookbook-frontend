@@ -4,6 +4,7 @@ export const usersApiSlice = createApi({
   reducerPath: 'usersApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_BACKEND_URL}/users`,
+    credentials: 'include', // Ensure cookies are sent with requests
   }),
   endpoints: (builder) => ({
     registerUser: builder.mutation({

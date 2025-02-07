@@ -5,6 +5,7 @@ export const recipesApiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_BACKEND_URL}/recipes`,
   }),
+  credentials: 'include', // Ensure cookies are sent with requests
   endpoints: (builder) => ({
     getRecipes: builder.query({
       query: () => '/',

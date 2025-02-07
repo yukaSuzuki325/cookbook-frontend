@@ -18,7 +18,6 @@ const Navbar = () => {
   const [logoutApiCall] = useLogoutUserMutation();
 
   const logoutHandler = async () => {
-    alert('called');
     try {
       await logoutApiCall().unwrap();
       dispatch(removeCredentials());
@@ -57,16 +56,28 @@ const Navbar = () => {
             <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-md border">
               {userInfo ? (
                 <>
-                  <button className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100">
+                  <button
+                    className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
+                    onClick={() => navigate('/recipes/add')}
+                  >
                     Add Recipe
                   </button>
-                  <button className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100">
+                  <button
+                    className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
+                    onClick={() => navigate('/recipes/saved')}
+                  >
                     Favourites
                   </button>
-                  <button className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100">
+                  <button
+                    className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
+                    onClick={() => navigate('/recipes/my-recipes')}
+                  >
                     My Recipes
                   </button>
-                  <button className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100">
+                  <button
+                    className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
+                    onClick={() => navigate('/profile')}
+                  >
                     Profile
                   </button>
                   <button

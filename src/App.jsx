@@ -2,14 +2,13 @@ import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
-import HomePage from './pages/HomePage';
 
 const App = () => {
   return (
     <>
-      <Header />
+      <Header className="" />
       <ToastContainer />
-      <main className="container mx-auto px-6 py-4">
+      <main className="container mx-auto px-6 py-14">
         <Outlet />
       </main>
     </>

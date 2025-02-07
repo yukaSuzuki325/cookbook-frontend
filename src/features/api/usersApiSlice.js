@@ -7,13 +7,38 @@ export const usersApiSlice = createApi({
   }),
   endpoints: (builder) => ({
     registerUser: builder.mutation({
-      query: (userData) => ({
+      query: (data) => ({
         url: '/',
         method: 'POST',
-        body: userData,
+        body: data,
+      }),
+    }),
+    loginUser: builder.mutation({
+      query: (data) => ({
+        url: '/auth',
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    logoutUser: builder.mutation({
+      query: () => ({
+        url: '/logout',
+        method: 'POST',
+      }),
+    }),
+    updateUser: builder.mutation({
+      query: (data) => ({
+        url: '/profile',
+        method: 'PUT',
+        body: data,
       }),
     }),
   }),
 });
 
-export const { useRegisterUserMutation } = usersApiSlice;
+export const {
+  useRegisterUserMutation,
+  useLoginUserMutation,
+  useLogoutUserMutation,
+  useUpdateUserMutation,
+} = usersApiSlice;

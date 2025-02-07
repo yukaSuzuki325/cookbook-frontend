@@ -23,7 +23,7 @@ const HomePage = () => {
   if (isError) return <div>Error fetching recipes.</div>;
 
   return (
-    <div className="container mx-auto px-6 py-8">
+    <div className="container mx-auto">
       {/* Search Bar */}
       <div className="flex justify-center mb-8">
         <div className="relative w-full max-w-3xl">

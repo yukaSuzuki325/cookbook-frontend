@@ -37,8 +37,8 @@ const RecipePage = () => {
   };
 
   return (
-    <div className="container mx-auto px-6 py-8">
-      <div className="bg-white rounded-lg shadow-md p-6 w-full">
+    <div className="container mx-auto">
+      <div className="bg-white rounded-lg shadow-md w-full">
         {/* Title and Interactive Icons */}
         <div className="flex justify-between items-center mb-4 flex-wrap">
           <h1 className="text-3xl font-bold">{title}</h1>

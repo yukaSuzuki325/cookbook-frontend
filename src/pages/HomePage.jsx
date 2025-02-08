@@ -82,13 +82,7 @@ const HomePage = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredRecipes.length > 0 ? (
           filteredRecipes.map((recipe) => (
-            <RecipeCard
-              key={recipe._id}
-              title={recipe.title}
-              category={recipe.category}
-              imageUrl={recipe.imageUrl}
-              id={recipe._id}
-            />
+            <RecipeCard key={recipe._id} {...recipe} />
           ))
         ) : (
           <div className="col-span-full text-center text-gray-600 text-lg">

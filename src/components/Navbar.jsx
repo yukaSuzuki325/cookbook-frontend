@@ -79,9 +79,9 @@ const Navbar = () => {
                   </button>
                   <button
                     className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-                    onClick={() => navigate('/recipes/saved')}
+                    onClick={() => navigate('/recipes/bookmarked')}
                   >
-                    Favourites
+                    Bookmarks
                   </button>
                   <button
                     className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"

@@ -26,6 +26,9 @@ export const recipesApiSlice = createApi({
     getUserRecipes: builder.query({
       query: (userId) => `/user/${userId}`, // Fetch recipes for a specific user
     }),
+    getBookmarkedRecipes: builder.query({
+      query: () => '/bookmarked',
+    }),
   }),
 });
 
@@ -35,4 +38,5 @@ export const {
   useBookmarkRecipeMutation,
   useCheckIfBookmarkedQuery,
   useGetUserRecipesQuery,
+  useGetBookmarkedRecipesQuery,
 } = recipesApiSlice;

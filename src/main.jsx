@@ -16,10 +16,11 @@ import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import AddRecipePage from './pages/AddRecipePage.jsx';
-import SavedPage from './pages/SavedPage.jsx';
+import BookmarkButton from './components/BookmarkButton.jsx';
 import EditRecipePage from './pages/EditRecipePage.jsx';
 import MyRecipesPage from './pages/MyRecipesPage.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
+import BookmarkedRecipesPage from './pages/BookmarkedRecipesPage.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,7 +34,7 @@ const router = createBrowserRouter(
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/recipes/my-recipes" element={<MyRecipesPage />} />
         <Route path="/recipes/add" element={<AddRecipePage />} />
-        <Route path="/recipes/saved" element={<SavedPage />} />
+        <Route path="/recipes/bookmarked" element={<BookmarkedRecipesPage />} />
         <Route path="/recipes/:id/edit" element={<EditRecipePage />} />
       </Route>
     </Route>

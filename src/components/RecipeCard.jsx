@@ -9,8 +9,20 @@ const RecipeCard = ({
   _id,
   cookingTime,
   description,
+  showActions,
 }) => {
   const navigate = useNavigate();
+
+  const handleEdit = () => {
+    navigate(`/recipes/${_id}/edit`);
+  };
+
+  const handleDelete = () => {
+    if (window.confirm('Are you sure you want to delete this recipe?')) {
+      // Implement delete logic here (e.g., call a mutation)
+      console.log(`Recipe ${_id} deleted.`);
+    }
+  };
 
   return (
     <div
@@ -32,6 +44,22 @@ const RecipeCard = ({
           <FaClock className="text-gray-500 text-lg mr-2" /> {cookingTime}{' '}
           minutes
         </p>
+        {showActions && (
+          <div className="flex justify-end gap-2 mt-4">
+            <button
+              onClick={handleEdit}
+              className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+            >
+              Edit
+            </button>
+            <button
+              onClick={handleDelete}
+              className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+            >
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

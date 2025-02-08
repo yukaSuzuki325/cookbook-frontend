@@ -18,7 +18,9 @@ const MyRecipesPage = () => {
       <h1 className="text-2xl font-bold mb-6">My Recipes</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {recipes.length > 0 ? (
-          recipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />)
+          recipes.map((recipe) => (
+            <RecipeCard key={recipe._id} {...recipe} showActions={true} />
+          ))
         ) : (
           <p>You have not created any recipes yet.</p>
         )}

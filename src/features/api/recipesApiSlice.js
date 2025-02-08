@@ -29,6 +29,12 @@ export const recipesApiSlice = createApi({
     getBookmarkedRecipes: builder.query({
       query: () => '/bookmarked',
     }),
+    deleteRecipe: builder.mutation({
+      query: (recipeId) => ({
+        url: `/${recipeId}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
@@ -39,4 +45,5 @@ export const {
   useCheckIfBookmarkedQuery,
   useGetUserRecipesQuery,
   useGetBookmarkedRecipesQuery,
+  useDeleteRecipeMutation,
 } = recipesApiSlice;

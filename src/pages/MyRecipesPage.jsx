@@ -6,7 +6,12 @@ import RecipeCard from '../components/RecipeCard';
 const MyRecipesPage = () => {
   const { userInfo } = useSelector((store) => store.auth);
   const { _id: userId } = userInfo;
-  const { data: recipes, isLoading, isError } = useGetUserRecipesQuery(userId);
+  const {
+    data: recipes,
+    isLoading,
+    isError,
+    refetch,
+  } = useGetUserRecipesQuery(userId);
 
   console.log(recipes);
 
@@ -19,7 +24,12 @@ const MyRecipesPage = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {recipes.length > 0 ? (
           recipes.map((recipe) => (
-            <RecipeCard key={recipe._id} {...recipe} showActions={true} />
+            <RecipeCard
+              key={recipe._id}
+              {...recipe}
+              showActions={true}
+              onRecipeDeleted={refetch}
+            />
           ))
         ) : (
           <p>You have not created any recipes yet.</p>

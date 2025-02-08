@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+import { useDeleteRecipeMutation } from '../features/api/recipesApiSlice';
 import { FaClock } from 'react-icons/fa';
 import { BiSolidCategory } from 'react-icons/bi';
+import { toast } from 'react-toastify';
 
 const RecipeCard = ({
   title,
@@ -10,17 +12,28 @@ const RecipeCard = ({
   cookingTime,
   description,
   showActions,
+  onRecipeDeleted,
 }) => {
+  const [deleteRecipe] = useDeleteRecipeMutation();
   const navigate = useNavigate();
 
-  const handleEdit = () => {
+  const handleEdit = (e) => {
+    e.stopPropagation();
     navigate(`/recipes/${_id}/edit`);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async (e) => {
+    e.stopPropagation();
     if (window.confirm('Are you sure you want to delete this recipe?')) {
-      // Implement delete logic here (e.g., call a mutation)
-      console.log(`Recipe ${_id} deleted.`);
+      try {
+        console.log(_id);
+
+        const res = await deleteRecipe(_id).unwrap();
+        toast.success(res.message);
+        onRecipeDeleted(); //Call refetch in MyRecipePage component
+      } catch (error) {
+        toast.error(error?.data?.message || 'Failed to delete the recipe.');
+      }
     }
   };
 

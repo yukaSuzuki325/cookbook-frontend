@@ -1,17 +1,16 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useGetRecipeByIdQuery } from '../features/api/recipesApiSlice';
 import LoadingPage from '../components/LoadingPage';
-import { FaClock, FaHeart, FaUsers } from 'react-icons/fa';
+import { FaClock, FaUsers } from 'react-icons/fa';
 import { BsShare } from 'react-icons/bs';
 import { IoLogoTwitter, IoLogoFacebook, IoLogoWhatsapp } from 'react-icons/io';
 import { useState } from 'react';
+import BookmarkButton from '../components/BookmarkButton';
 
 const RecipePage = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const { data: recipe, isLoading, isError } = useGetRecipeByIdQuery(id);
   const [showShareOptions, setShowShareOptions] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   if (isLoading) return <LoadingPage />;
   if (isError || !recipe) return <div>Error fetching recipe.</div>;
@@ -27,14 +26,6 @@ const RecipePage = () => {
     category,
     cookingTime,
   } = recipe;
-
-  const handleBookmarkClick = () => {
-    if (!isLoggedIn) {
-      navigate('/login');
-    } else {
-      alert('Recipe bookmarked!');
-    }
-  };
 
   return (
     <div className="container mx-auto">
@@ -78,13 +69,7 @@ const RecipePage = () => {
               )}
             </div>
 
-            {/* Bookmark Button */}
-            <button
-              className="p-2 bg-gray-100 rounded-full shadow-md hover:shadow-lg"
-              onClick={handleBookmarkClick}
-            >
-              <FaHeart className="text-red-500 text-lg" />
-            </button>
+            <BookmarkButton recipe={recipe} />
           </div>
         </div>
 

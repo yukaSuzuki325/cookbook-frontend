@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLogoutUserMutation } from '../features/api/usersApiSlice';
 import { BiMenu, BiUserCircle } from 'react-icons/bi';
-import { FaUtensils } from 'react-icons/fa';
+import { MdRamenDining } from 'react-icons/md';
 import { removeCredentials } from '../features/auth/authSlice';
 
 const Navbar = () => {
@@ -48,7 +48,7 @@ const Navbar = () => {
           onClick={() => navigate('/')}
           className="flex items-center cursor-pointer"
         >
-          <FaUtensils className="text-orange-500 text-3xl mr-2" />
+          <MdRamenDining className="text-orange-500 text-3xl mr-2" />
           <span className="font-bold text-xl text-gray-800">cookbook</span>
         </div>
 

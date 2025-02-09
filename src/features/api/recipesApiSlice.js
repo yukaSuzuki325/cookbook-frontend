@@ -35,6 +35,16 @@ export const recipesApiSlice = createApi({
         method: 'DELETE',
       }),
     }),
+    createRecipe: builder.mutation({
+      query: (recipe) => ({
+        url: '/',
+        method: 'POST',
+        body: recipe,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    }),
   }),
 });
 
@@ -46,4 +56,5 @@ export const {
   useGetUserRecipesQuery,
   useGetBookmarkedRecipesQuery,
   useDeleteRecipeMutation,
+  useCreateRecipeMutation,
 } = recipesApiSlice;

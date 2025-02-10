@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useCreateRecipeMutation } from '../features/api/recipesApiSlice';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { FiPlus } from 'react-icons/fi';
 
 const AddRecipePage = () => {
   const [createRecipe, { isLoading }] = useCreateRecipeMutation();
@@ -14,10 +15,10 @@ const AddRecipePage = () => {
     servings: '',
     category: '',
     imageUrl: '',
+    steps: '',
   });
 
   const [ingredients, setIngredients] = useState([{ name: '', quantity: '' }]);
-  const [steps, setSteps] = useState(['']);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,36 +31,26 @@ const AddRecipePage = () => {
     setIngredients(updatedIngredients);
   };
 
-  const handleStepChange = (index, value) => {
-    const updatedSteps = [...steps];
-    updatedSteps[index] = value;
-    setSteps(updatedSteps);
-  };
-
   const addIngredient = () => {
     setIngredients([...ingredients, { name: '', quantity: '' }]);
   };
 
-  const addStep = () => {
-    setSteps([...steps, '']);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData.steps);
 
-    const recipe = {
-      ...formData,
-      ingredients,
-      steps: steps.map((instruction, index) => ({
-        stepNumber: index + 1,
-        instruction,
-      })),
-    };
-
-    console.log('Submitting recipe:', recipe);
+    // Convert steps into array
+    const stepsArray = formData.steps.split('\n').map((instruction, index) => ({
+      stepNumber: index + 1,
+      instruction: instruction.trim(),
+    }));
 
     try {
-      await createRecipe(recipe).unwrap();
+      await createRecipe({
+        ...formData,
+        ingredients,
+        steps: stepsArray,
+      }).unwrap();
       toast.success('Recipe created successfully!');
       navigate('/recipes/my-recipes');
     } catch (error) {
@@ -69,7 +60,7 @@ const AddRecipePage = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto lg:w-3/5">
       <h1 className="text-2xl font-bold mb-4">Add New Recipe</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -93,9 +84,7 @@ const AddRecipePage = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-700">
-            Ingredients (name and quantity)
-          </label>
+          <label className="block text-gray-700">Ingredients</label>
           {ingredients.map((ingredient, index) => (
             <div key={index} className="flex gap-2 mb-2">
               <input
@@ -120,35 +109,25 @@ const AddRecipePage = () => {
               />
             </div>
           ))}
-          <button
-            type="button"
-            onClick={addIngredient}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
-            Add Ingredient
-          </button>
+          <div className="flex flex-row-reverse">
+            <button
+              type="button"
+              onClick={addIngredient}
+              className="flex items-center justify-center w-10 h-10 bg-white text-orange-500 border border-gray-300 rounded hover:border-orange-400"
+            >
+              <FiPlus size={20} />
+            </button>
+          </div>
         </div>
         <div>
-          <label className="block text-gray-700">Steps</label>
-          {steps.map((step, index) => (
-            <div key={index} className="mb-2">
-              <input
-                type="text"
-                placeholder={`Step ${index + 1}`}
-                value={step}
-                onChange={(e) => handleStepChange(index, e.target.value)}
-                className="w-full border border-gray-300 rounded p-2"
-                required
-              />
-            </div>
-          ))}
-          <button
-            type="button"
-            onClick={addStep}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
-            Add Step
-          </button>
+          <label className="block text-gray-700">Steps (one per line)</label>
+          <textarea
+            name="steps"
+            value={formData.steps}
+            onChange={handleChange}
+            className="w-full border border-gray-300 rounded p-2"
+            required
+          />
         </div>
         <div>
           <label className="block text-gray-700">
@@ -202,7 +181,7 @@ const AddRecipePage = () => {
         </div>
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
           disabled={isLoading}
         >
           {isLoading ? 'Submitting...' : 'Add Recipe'}

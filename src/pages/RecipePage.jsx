@@ -3,7 +3,14 @@ import { useGetRecipeByIdQuery } from '../features/api/recipesApiSlice';
 import LoadingPage from '../components/LoadingPage';
 import { FaClock, FaUsers } from 'react-icons/fa';
 import { BsShare } from 'react-icons/bs';
-import { IoLogoTwitter, IoLogoFacebook, IoLogoWhatsapp } from 'react-icons/io';
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  WhatsappIcon,
+} from 'react-share';
 import { useEffect, useState } from 'react';
 import BookmarkButton from '../components/BookmarkButton';
 
@@ -39,6 +46,8 @@ const RecipePage = () => {
     cookingTime,
   } = recipe;
 
+  const shareUrl = `${import.meta.env.VITE_PUBLIC_DOMAIN}/recipes/${id}`;
+
   return (
     <div className="container mx-auto">
       <div className="bg-white rounded-lg w-full">
@@ -55,28 +64,22 @@ const RecipePage = () => {
                 <BsShare className="text-gray-600 text-lg" />
               </button>
               {showShareOptions && (
-                <div className="absolute right-0 top-0 -translate-y-full bg-white shadow-md rounded-lg p-2 flex  gap-2">
-                  <a
-                    href={`https://twitter.com/intent/tweet?url=http://localhost:5173/recipes/${id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <div className="absolute right-0 top-0 -translate-y-full bg-white rounded-lg p-2 flex  gap-2">
+                  <FacebookShareButton url={shareUrl} quote={title}>
+                    <FacebookIcon size={30} round={true} />
+                  </FacebookShareButton>
+
+                  <TwitterShareButton url={shareUrl} title={title}>
+                    <TwitterIcon size={30} round={true} />
+                  </TwitterShareButton>
+
+                  <WhatsappShareButton
+                    url={shareUrl}
+                    title={title}
+                    separator=":: "
                   >
-                    <IoLogoTwitter className="text-blue-500 text-xl hover:opacity-75" />
-                  </a>
-                  <a
-                    href={`https://www.facebook.com/sharer/sharer.php?u=http://localhost:5173/recipes/${id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <IoLogoFacebook className="text-blue-700 text-xl hover:opacity-75" />
-                  </a>
-                  <a
-                    href={`https://wa.me/?text=http://localhost:5173/recipes/${id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <IoLogoWhatsapp className="text-green-500 text-xl hover:opacity-75" />
-                  </a>
+                    <WhatsappIcon size={30} round={true} />
+                  </WhatsappShareButton>
                 </div>
               )}
             </div>

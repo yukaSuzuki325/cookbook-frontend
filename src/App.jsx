@@ -6,9 +6,9 @@ import Header from './components/Header';
 const App = () => {
   return (
     <>
-      <Header className="" />
+      <Header />
       <ToastContainer />
-      <main className="container mx-auto px-6 py-14">
+      <main className="container mx-auto px-10 py-14">
         <Outlet />
       </main>
     </>

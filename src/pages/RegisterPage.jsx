@@ -45,12 +45,13 @@ const RegisterPage = () => {
         const res = await register({ name, email, password }).unwrap();
         dispatch(setCredentials(res));
         navigate('/');
-        toast.success('You are logged in!');
       } catch (err) {
         toast.error(err?.data?.message || err.error);
       }
     }
   };
+
+  if (isLoading) return <LoadingPage />;
 
   return (
     <div className="flex items-center justify-center bg-gray-50">

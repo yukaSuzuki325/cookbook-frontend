@@ -1,6 +1,7 @@
 import { useGetBookmarkedRecipesQuery } from '../features/api/recipesApiSlice';
 import RecipeCard from '../components/RecipeCard';
 import LoadingPage from '../components/LoadingPage';
+import { Link } from 'react-router-dom';
 
 const BookmarkedRecipesPage = () => {
   const { data: recipes, isLoading, isError } = useGetBookmarkedRecipesQuery();
@@ -17,7 +18,9 @@ const BookmarkedRecipesPage = () => {
         {recipes.length > 0 ? (
           recipes.map((recipe) => <RecipeCard key={recipe._id} {...recipe} />)
         ) : (
-          <p>You have not bookmarked any recipes yet.</p>
+          <p className="text-lg text-gray-700 mb-4">
+            You have not bookmarked any recipes yet.
+          </p>
         )}
       </div>
     </div>

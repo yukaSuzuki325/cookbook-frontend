@@ -42,7 +42,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="container mx-auto flex items-center justify-between py-4 px-6">
+      <div className="container mx-auto flex items-center justify-between py-4 px-10">
         {/* Logo */}
         <div
           onClick={() => navigate('/')}
@@ -58,7 +58,7 @@ const Navbar = () => {
             className="flex items-center gap-2 bg-gray-100 p-2 rounded-full hover:shadow-lg"
             onClick={() => setIsDropdownOpen((prev) => !prev)}
           >
-            <BiMenu className="text-gray-600 text-xl" />
+            <BiMenu className="text-orange-600 text-xl" />
             {userInfo ? (
               <div className="text-gray-600">{userInfo.name}</div>
             ) : (

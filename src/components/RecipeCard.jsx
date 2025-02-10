@@ -49,7 +49,7 @@ const RecipeCard = ({
       />
       <div className="p-4">
         <h2 className="text-xl font-semibold">{title}</h2>
-        <p className="text-gray-600">{description}</p>
+
         <p className="flex items-center  text-gray-600">
           <BiSolidCategory className="text-gray-500 text-lg mr-2" /> {category}
         </p>

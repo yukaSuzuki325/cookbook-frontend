@@ -45,6 +45,16 @@ export const recipesApiSlice = createApi({
         },
       }),
     }),
+    updateRecipe: builder.mutation({
+      query: ({ id, ...recipe }) => ({
+        url: `/${id}`,
+        method: 'PUT',
+        body: recipe,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    }),
   }),
 });
 
@@ -57,4 +67,5 @@ export const {
   useGetBookmarkedRecipesQuery,
   useDeleteRecipeMutation,
   useCreateRecipeMutation,
+  useUpdateRecipeMutation,
 } = recipesApiSlice;

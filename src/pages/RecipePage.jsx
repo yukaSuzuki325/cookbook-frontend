@@ -1,16 +1,28 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useGetRecipeByIdQuery } from '../features/api/recipesApiSlice';
 import LoadingPage from '../components/LoadingPage';
 import { FaClock, FaUsers } from 'react-icons/fa';
 import { BsShare } from 'react-icons/bs';
 import { IoLogoTwitter, IoLogoFacebook, IoLogoWhatsapp } from 'react-icons/io';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BookmarkButton from '../components/BookmarkButton';
 
 const RecipePage = () => {
   const { id } = useParams();
-  const { data: recipe, isLoading, isError } = useGetRecipeByIdQuery(id);
+  const { state } = useLocation();
+  const {
+    data: recipe,
+    isLoading,
+    isError,
+    refetch,
+  } = useGetRecipeByIdQuery(id);
   const [showShareOptions, setShowShareOptions] = useState(false);
+
+  useEffect(() => {
+    if (state?.refetch) {
+      refetch();
+    }
+  }, [state, refetch]);
 
   if (isLoading) return <LoadingPage />;
   if (isError || !recipe) return <div>Error fetching recipe.</div>;

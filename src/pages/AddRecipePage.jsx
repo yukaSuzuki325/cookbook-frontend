@@ -113,7 +113,7 @@ const AddRecipePage = () => {
             <button
               type="button"
               onClick={addIngredient}
-              className="flex items-center justify-center w-10 h-10 bg-white text-orange-500 border border-gray-300 rounded hover:border-orange-400"
+              className="flex items-center justify-center w-10 h-10 bg-white text-orange-500 border border-gray-200 rounded hover:border-orange-400"
             >
               <FiPlus size={20} />
             </button>

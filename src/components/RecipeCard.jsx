@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useDeleteRecipeMutation } from '../features/api/recipesApiSlice';
-import { FaClock } from 'react-icons/fa';
+import { FaClock, FaEdit, FaTrash } from 'react-icons/fa';
 import { BiSolidCategory } from 'react-icons/bi';
 import { toast } from 'react-toastify';
 
@@ -61,15 +61,15 @@ const RecipeCard = ({
           <div className="flex justify-end gap-2 mt-4">
             <button
               onClick={handleEdit}
-              className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+              className="flex items-center justify-center w-10 h-10 border border-orange-300 rounded text-orange-500 bg-white hover:bg-orange-100"
             >
-              Edit
+              <FaEdit size={16} />
             </button>
             <button
               onClick={handleDelete}
-              className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+              className="flex items-center justify-center w-10 h-10 border border-orange-300 rounded text-orange-500 bg-white hover:bg-orange-100"
             >
-              Delete
+              <FaTrash size={16} />
             </button>
           </div>
         )}

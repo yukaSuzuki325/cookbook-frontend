@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useGetRecipesQuery } from '../features/api/recipesApiSlice';
 import { BiSearch } from 'react-icons/bi';
 import { FaLeaf, FaFish, FaCarrot, FaDrumstickBite } from 'react-icons/fa';
+import { MdOutlineAllInclusive } from 'react-icons/md';
+import { PiCookingPotFill } from 'react-icons/pi';
 import LoadingPage from '../components/LoadingPage';
 import RecipeCard from '../components/RecipeCard';
 
@@ -40,6 +42,15 @@ const HomePage = () => {
 
       {/* Category Icons */}
       <div className="flex justify-around mb-8">
+        <button
+          className={`flex flex-col items-center text-gray-600 ${
+            category === 'All' ? 'text-blue-500' : ''
+          }`}
+          onClick={() => setCategory('All')}
+        >
+          <PiCookingPotFill className="text-3xl mb-2" />
+          All
+        </button>
         <button
           className={`flex flex-col items-center text-gray-600 ${
             category === 'Vegan' ? 'text-blue-500' : ''

@@ -46,7 +46,7 @@ const RecipePage = () => {
     cookingTime,
   } = recipe;
 
-  const shareUrl = `http://localhost:3000/recipes/${id}`;
+  const shareUrl = `https://amazingcookbook.netlify.app/recipes/${id}`;
 
   return (
     <div className="container mx-auto">

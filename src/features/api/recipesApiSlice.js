@@ -1,9 +1,16 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+const BASE_URL =
+  import.meta.env.MODE === 'development'
+    ? 'http://localhost:8080/api'
+    : 'https://cookbook-backend-5yyk.onrender.com/api';
+
+console.log(BASE_URL);
+
 export const recipesApiSlice = createApi({
   reducerPath: 'recipesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${import.meta.env.VITE_BACKEND_URL}/recipes`,
+    baseUrl: `${BASE_URL}/recipes`,
     credentials: 'include', // Ensure cookies are sent with requests
   }),
 

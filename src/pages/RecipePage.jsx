@@ -46,7 +46,7 @@ const RecipePage = () => {
     cookingTime,
   } = recipe;
 
-  const shareUrl = `${import.meta.env.VITE_PUBLIC_DOMAIN}/recipes/${id}`;
+  const shareUrl = `http://localhost:3000/recipes/${id}`;
 
   return (
     <div className="container mx-auto">

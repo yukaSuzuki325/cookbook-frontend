@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useGetRecipesQuery } from '../features/api/recipesApiSlice';
 import { BiSearch } from 'react-icons/bi';
 import { FaLeaf, FaFish, FaCarrot, FaDrumstickBite } from 'react-icons/fa';
-import { MdOutlineAllInclusive } from 'react-icons/md';
 import { PiCookingPotFill } from 'react-icons/pi';
 import LoadingPage from '../components/LoadingPage';
 import RecipeCard from '../components/RecipeCard';

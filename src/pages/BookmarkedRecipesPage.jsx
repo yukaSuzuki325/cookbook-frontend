@@ -1,12 +1,22 @@
 import { useGetBookmarkedRecipesQuery } from '../features/api/recipesApiSlice';
 import RecipeCard from '../components/RecipeCard';
 import LoadingPage from '../components/LoadingPage';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const BookmarkedRecipesPage = () => {
-  const { data: recipes, isLoading, isError } = useGetBookmarkedRecipesQuery();
+  const { state } = useLocation();
+  const {
+    data: recipes,
+    isLoading,
+    isError,
+    refetch,
+  } = useGetBookmarkedRecipesQuery();
 
-  console.log(recipes);
+  // Trigger refetch when this page is visited, to make sure showing updated list of bookmarked recipes every time and not used cashed data
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   if (isLoading) return <LoadingPage />;
   if (isError) return <p>Failed to fetch bookmarked recipes.</p>;

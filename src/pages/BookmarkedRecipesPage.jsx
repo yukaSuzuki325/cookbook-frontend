@@ -13,7 +13,7 @@ const BookmarkedRecipesPage = () => {
     refetch,
   } = useGetBookmarkedRecipesQuery();
 
-  // Trigger refetch when this page is visited, to make sure showing updated list of bookmarked recipes every time and not used cashed data
+  // Trigger refetch every time this page is visited and refetch has a new reference, making sure to show updated list of bookmarks
   useEffect(() => {
     refetch();
   }, [refetch]);

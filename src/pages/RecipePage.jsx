@@ -89,11 +89,11 @@ const RecipePage = () => {
         </div>
 
         {/* Image and Description */}
-        <div className="flex gap-10 flex-wrap">
+        <div className="flex justify-between flex-wrap">
           <img
             src={imageUrl}
             alt={title}
-            className="w-full lg:w-3/5 h-80 object-cover rounded-lg"
+            className="w-full lg:w-3/5 h-80 object-cover rounded-lg md:mb-4"
           />
           <div className="max-w-md mb-4">
             <p className="text-lg text-gray-700 mb-4">{description}</p>

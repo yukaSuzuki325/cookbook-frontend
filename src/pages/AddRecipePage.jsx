@@ -32,12 +32,17 @@ const AddRecipePage = () => {
   };
 
   const addIngredient = () => {
+    console.log('imageUrl', formData.imageUrl);
+
     setIngredients([...ingredients, { name: '', quantity: '' }]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData.steps);
+    if (!formData.imageUrl) {
+      formData.imageUrl =
+        'https://res.cloudinary.com/dcklvu8tf/image/upload/v1739442214/cookbook/spices.jpg';
+    }
 
     // Convert steps into array
     const stepsArray = formData.steps.split('\n').map((instruction, index) => ({
@@ -174,7 +179,7 @@ const AddRecipePage = () => {
             </select>
           </div>
           <div>
-            <label className="block text-gray-700">Image URL</label>
+            <label className="block text-gray-700">Image URL (optional)</label>
             <input
               type="text"
               name="imageUrl"

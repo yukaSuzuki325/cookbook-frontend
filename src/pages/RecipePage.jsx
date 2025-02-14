@@ -2,17 +2,9 @@ import { useParams, useLocation } from 'react-router-dom';
 import { useGetRecipeByIdQuery } from '../features/api/recipesApiSlice';
 import LoadingPage from '../components/LoadingPage';
 import { FaClock, FaUsers } from 'react-icons/fa';
-import { BsShare } from 'react-icons/bs';
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  WhatsappShareButton,
-  FacebookIcon,
-  TwitterIcon,
-  WhatsappIcon,
-} from 'react-share';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import BookmarkButton from '../components/BookmarkButton';
+import ShareButton from '../components/ShareButton';
 
 const RecipePage = () => {
   const { id } = useParams();
@@ -23,7 +15,6 @@ const RecipePage = () => {
     isError,
     refetch,
   } = useGetRecipeByIdQuery(id);
-  const [showShareOptions, setShowShareOptions] = useState(false);
 
   useEffect(() => {
     if (state?.refetch) {
@@ -46,8 +37,6 @@ const RecipePage = () => {
     cookingTime,
   } = recipe;
 
-  const shareUrl = `https://amazingcookbook.netlify.app/recipes/${id}`;
-
   return (
     <div className="container mx-auto">
       <div className="bg-white rounded-lg w-full">
@@ -55,35 +44,7 @@ const RecipePage = () => {
         <div className="flex justify-between items-center mb-4 flex-wrap">
           <h1 className="text-3xl font-bold">{title}</h1>
           <div className="flex gap-4">
-            {/* Share Button */}
-            <div className="relative">
-              <button
-                className="p-2 bg-gray-100 rounded-full shadow-md hover:shadow-lg"
-                onClick={() => setShowShareOptions(!showShareOptions)}
-              >
-                <BsShare className="text-gray-600 text-lg" />
-              </button>
-              {showShareOptions && (
-                <div className="absolute right-0 top-0 -translate-y-full bg-white rounded-lg p-2 flex  gap-2">
-                  <FacebookShareButton url={shareUrl} quote={title}>
-                    <FacebookIcon size={30} round={true} />
-                  </FacebookShareButton>
-
-                  <TwitterShareButton url={shareUrl} title={title}>
-                    <TwitterIcon size={30} round={true} />
-                  </TwitterShareButton>
-
-                  <WhatsappShareButton
-                    url={shareUrl}
-                    title={title}
-                    separator=":: "
-                  >
-                    <WhatsappIcon size={30} round={true} />
-                  </WhatsappShareButton>
-                </div>
-              )}
-            </div>
-
+            <ShareButton title={title} id={id} />
             <BookmarkButton recipe={recipe} />
           </div>
         </div>

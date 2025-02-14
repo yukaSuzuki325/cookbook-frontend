@@ -22,6 +22,7 @@ const EditRecipePage = () => {
     servings: '',
     category: '',
     steps: '',
+    imageUrl: '',
   });
 
   const [ingredients, setIngredients] = useState([
@@ -39,6 +40,7 @@ const EditRecipePage = () => {
         cookingTime: recipe.cookingTime,
         servings: recipe.servings,
         category: recipe.category,
+        imageUrl: recipe.imageUrl,
         steps: recipe.steps.map((step) => step.instruction).join('\n'),
       });
       setIngredients(recipe.ingredients);
@@ -63,6 +65,11 @@ const EditRecipePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!formData.imageUrl) {
+      formData.imageUrl =
+        'https://res.cloudinary.com/dcklvu8tf/image/upload/v1739442214/cookbook/spices.jpg';
+    }
+
     const recipeData = {
       id: recipeId,
       ...formData,
@@ -72,8 +79,6 @@ const EditRecipePage = () => {
         instruction,
       })),
     };
-
-    console.log('Recipe data being sent:', recipeData);
 
     try {
       await updateRecipe(recipeData).unwrap();
@@ -206,6 +211,16 @@ const EditRecipePage = () => {
               <option value="Vegetarian">Vegetarian</option>
               <option value="Vegan">Vegan</option>
             </select>
+          </div>
+          <div>
+            <label className="block text-gray-700">Image URL (optional)</label>
+            <input
+              type="text"
+              name="imageUrl"
+              value={formData.imageUrl}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded p-2"
+            />
           </div>
           <button
             type="submit"

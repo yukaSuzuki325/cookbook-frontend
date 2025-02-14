@@ -4,8 +4,8 @@ import {
   useGetRecipeByIdQuery,
 } from '../features/api/recipesApiSlice';
 import { useParams, useNavigate } from 'react-router-dom';
+import { handleRecipeSubmit } from '../utils/recipeHelpers';
 import LoadingPage from '../components/LoadingPage';
-import { toast } from 'react-toastify';
 import RecipeForm from '../components/RecipeForm';
 
 const EditRecipePage = () => {
@@ -32,6 +32,7 @@ const EditRecipePage = () => {
     },
   ]);
 
+  //Update formData value with the fetched recipe data, only the data becomes available
   useEffect(() => {
     if (recipe) {
       setFormData({
@@ -50,33 +51,13 @@ const EditRecipePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.imageUrl) {
-      formData.imageUrl =
-        'https://res.cloudinary.com/dcklvu8tf/image/upload/v1739442214/cookbook/spices.jpg';
-    }
-
-    //Convert steps into array
-    const stepsArray = formData.steps.split('\n').map((instruction, index) => ({
-      stepNumber: index + 1,
-      instruction: instruction.trim(),
-    }));
-
-    const recipeData = {
-      id: recipeId,
-      ...formData,
+    await handleRecipeSubmit({
+      formData,
       ingredients,
-      steps: stepsArray,
-    };
-
-    try {
-      await updateRecipe(recipeData).unwrap();
-      toast.success('Recipe updated successfully!');
-      //Refetch the recipe after navigating
-      navigate(`/recipes/${recipeId}`, { state: { refetch: true } });
-    } catch (error) {
-      console.error('Error updating recipe:', error);
-      toast.error(error?.data?.message || 'Failed to update recipe');
-    }
+      recipeId,
+      action: updateRecipe,
+      navigate,
+    });
   };
 
   if (isLoading) return <LoadingPage />;
@@ -84,8 +65,6 @@ const EditRecipePage = () => {
     return (
       <h1 className="text-center text-2xl font-bold mt-10">Recipe not found</h1>
     );
-
-  console.log('recipe', recipe);
 
   return (
     <>

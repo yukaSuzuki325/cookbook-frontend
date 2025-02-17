@@ -3,14 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import { useLogoutUserMutation } from '../features/api/usersApiSlice';
 import { removeCredentials } from '../features/auth/authSlice';
 
-const DropdownMenu = () => {
+const DropdownMenu = ({ isDropDownOpen, setIsDropdownOpen }) => {
   const { userInfo } = useSelector((store) => store.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [logoutApiCall] = useLogoutUserMutation();
 
+  const handleClickMenu = (route) => {
+    setIsDropdownOpen((prev) => !prev);
+    navigate(route);
+  };
+
   const logoutHandler = async () => {
+    setIsDropdownOpen((prev) => !prev);
     try {
       await logoutApiCall().unwrap();
       dispatch(removeCredentials());
@@ -26,25 +32,25 @@ const DropdownMenu = () => {
         <>
           <button
             className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-            onClick={() => navigate('/recipes/add')}
+            onClick={() => handleClickMenu('/recipes/add')}
           >
             Add Recipe
           </button>
           <button
             className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-            onClick={() => navigate('/recipes/bookmarked')}
+            onClick={() => handleClickMenu('/recipes/bookmarked')}
           >
             Bookmarks
           </button>
           <button
             className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-            onClick={() => navigate('/recipes/my-recipes')}
+            onClick={() => handleClickMenu('/recipes/my-recipes')}
           >
             My Recipes
           </button>
           <button
             className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-            onClick={() => navigate('/profile')}
+            onClick={() => handleClickMenu('/profile')}
           >
             Profile
           </button>
@@ -59,13 +65,13 @@ const DropdownMenu = () => {
         <>
           <button
             className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-            onClick={() => navigate('/login')}
+            onClick={() => handleClickMenu('/login')}
           >
             Login
           </button>
           <button
             className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-            onClick={() => navigate('/register')}
+            onClick={() => handleClickMenu('/register')}
           >
             Register
           </button>

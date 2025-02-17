@@ -1,10 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { useLogoutUserMutation } from '../features/api/usersApiSlice';
+import { useSelector } from 'react-redux';
 import { BiMenu, BiUserCircle } from 'react-icons/bi';
 import { MdRamenDining } from 'react-icons/md';
-
 import DropdownMenu from './DropdownMenu';
 
 const Navbar = () => {
@@ -13,7 +11,6 @@ const Navbar = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleOutsideClick = (e) => {
@@ -56,7 +53,12 @@ const Navbar = () => {
           </button>
 
           {/* Dropdown Menu */}
-          {isDropdownOpen && <DropdownMenu />}
+          {isDropdownOpen && (
+            <DropdownMenu
+              isDropdownOpen={isDropdownOpen}
+              setIsDropdownOpen={setIsDropdownOpen}
+            />
+          )}
         </div>
       </div>
     </nav>

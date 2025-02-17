@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLogoutUserMutation } from '../features/api/usersApiSlice';
 import { BiMenu, BiUserCircle } from 'react-icons/bi';
 import { MdRamenDining } from 'react-icons/md';
-import { removeCredentials } from '../features/auth/authSlice';
+
+import DropdownMenu from './DropdownMenu';
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -14,18 +15,6 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [logoutApiCall] = useLogoutUserMutation();
-
-  const logoutHandler = async () => {
-    try {
-      await logoutApiCall().unwrap();
-      dispatch(removeCredentials());
-      navigate('/');
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   const handleOutsideClick = (e) => {
     if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -67,59 +56,7 @@ const Navbar = () => {
           </button>
 
           {/* Dropdown Menu */}
-          {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-md border">
-              {userInfo ? (
-                <>
-                  <button
-                    className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-                    onClick={() => navigate('/recipes/add')}
-                  >
-                    Add Recipe
-                  </button>
-                  <button
-                    className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-                    onClick={() => navigate('/recipes/bookmarked')}
-                  >
-                    Bookmarks
-                  </button>
-                  <button
-                    className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-                    onClick={() => navigate('/recipes/my-recipes')}
-                  >
-                    My Recipes
-                  </button>
-                  <button
-                    className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-                    onClick={() => navigate('/profile')}
-                  >
-                    Profile
-                  </button>
-                  <button
-                    className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-                    onClick={logoutHandler}
-                  >
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button
-                    className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-                    onClick={() => navigate('/login')}
-                  >
-                    Login
-                  </button>
-                  <button
-                    className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-                    onClick={() => navigate('/register')}
-                  >
-                    Register
-                  </button>
-                </>
-              )}
-            </div>
-          )}
+          {isDropdownOpen && <DropdownMenu />}
         </div>
       </div>
     </nav>

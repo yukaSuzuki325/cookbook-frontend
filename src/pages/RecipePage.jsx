@@ -2,6 +2,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { useGetRecipeByIdQuery } from '../features/api/recipesApiSlice';
 import LoadingPage from '../components/LoadingPage';
 import { FaClock, FaUsers } from 'react-icons/fa';
+import { BiSolidCategory } from 'react-icons/bi';
 import { useEffect } from 'react';
 import BookmarkButton from '../components/BookmarkButton';
 import ShareButton from '../components/ShareButton';
@@ -66,6 +67,10 @@ const RecipePage = () => {
               <p className="flex items-center text-gray-600">
                 <FaClock className="text-gray-500 text-lg mr-2" /> {cookingTime}{' '}
                 minutes
+              </p>
+              <p className="flex items-center text-gray-600">
+                <BiSolidCategory className="text-gray-500 text-lg mr-2" />{' '}
+                {category}
               </p>
             </div>
           </div>

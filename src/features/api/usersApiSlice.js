@@ -5,27 +5,27 @@ export const usersApiSlice = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     registerUser: builder.mutation({
       query: (data) => ({
-        url: '/',
+        url: '/users',
         method: 'POST',
         body: data,
       }),
     }),
     loginUser: builder.mutation({
       query: (data) => ({
-        url: '/auth',
+        url: '/users/auth',
         method: 'POST',
         body: data,
       }),
     }),
     logoutUser: builder.mutation({
       query: () => ({
-        url: '/logout',
+        url: '/users/logout',
         method: 'POST',
       }),
     }),
     updateUser: builder.mutation({
       query: (data) => ({
-        url: '/profile',
+        url: '/users/profile',
         method: 'PUT',
         body: data,
       }),

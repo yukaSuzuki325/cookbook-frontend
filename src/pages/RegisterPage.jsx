@@ -43,6 +43,8 @@ const RegisterPage = () => {
     } else {
       try {
         const res = await register({ name, email, password }).unwrap();
+        console.log('response when registered', res);
+
         dispatch(setCredentials(res));
         navigate('/');
       } catch (err) {

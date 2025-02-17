@@ -1,50 +1,38 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { baseApi } from './baseApi';
 
-const BASE_URL =
-  import.meta.env.MODE === 'development'
-    ? 'http://localhost:8080/api'
-    : 'https://cookbook-backend-5yyk.onrender.com/api';
-
-console.log(BASE_URL);
-
-export const recipesApiSlice = createApi({
+export const recipesApiSlice = baseApi.injectEndpoints({
   reducerPath: 'recipesApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${BASE_URL}/recipes`,
-    credentials: 'include', // Ensure cookies are sent with requests
-  }),
-
   endpoints: (builder) => ({
     getRecipes: builder.query({
-      query: () => '/',
+      query: () => '/recipes',
     }),
     getRecipeById: builder.query({
-      query: (id) => `/${id}`,
+      query: (id) => `/recipes/${id}`,
     }),
     bookmarkRecipe: builder.mutation({
       query: ({ recipeId }) => ({
-        url: `/${recipeId}/bookmark`,
+        url: `/recipes/${recipeId}/bookmark`,
         method: 'POST',
       }),
     }),
     checkIfBookmarked: builder.query({
-      query: (id) => `/${id}/bookmarked`,
+      query: (id) => `/recipes/${id}/bookmarked`,
     }),
     getUserRecipes: builder.query({
-      query: (userId) => `/user/${userId}`,
+      query: (userId) => `/recipes/user/${userId}`,
     }),
     getBookmarkedRecipes: builder.query({
-      query: () => '/bookmarked',
+      query: () => '/recipes/bookmarked',
     }),
     deleteRecipe: builder.mutation({
       query: (recipeId) => ({
-        url: `/${recipeId}`,
+        url: `/recipes/${recipeId}`,
         method: 'DELETE',
       }),
     }),
     createRecipe: builder.mutation({
       query: (recipe) => ({
-        url: '/',
+        url: '/recipes',
         method: 'POST',
         body: recipe,
         headers: {
@@ -54,7 +42,7 @@ export const recipesApiSlice = createApi({
     }),
     updateRecipe: builder.mutation({
       query: ({ id, ...recipe }) => ({
-        url: `/${id}`,
+        url: `/recipes/${id}`,
         method: 'PUT',
         body: recipe,
         headers: {

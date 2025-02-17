@@ -1,16 +1,7 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { baseApi } from './baseApi';
 
-const BASE_URL =
-  import.meta.env.MODE === 'development'
-    ? 'http://localhost:8080/api'
-    : 'https://cookbook-backend-5yyk.onrender.com/api';
-
-export const usersApiSlice = createApi({
+export const usersApiSlice = baseApi.injectEndpoints({
   reducerPath: 'usersApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${BASE_URL}/users`,
-    credentials: 'include', // Ensure cookies are sent with requests
-  }),
   endpoints: (builder) => ({
     registerUser: builder.mutation({
       query: (data) => ({

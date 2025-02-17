@@ -1,16 +1,7 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { baseApi } from './baseApi';
 
-const BASE_URL =
-  import.meta.env.MODE === 'development'
-    ? 'http://localhost:8080/api'
-    : 'https://cookbook-backend-5yyk.onrender.com/api';
-
-export const imageApiSlice = createApi({
+export const imageApiSlice = baseApi.injectEndpoints({
   reducerPath: 'imageApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${BASE_URL}/image`,
-    credentials: 'include',
-  }),
   endpoints: (builder) => ({
     uploadImage: builder.mutation({
       query: (data) => ({

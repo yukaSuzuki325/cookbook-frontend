@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useGetRecipesQuery } from '../features/api/recipesApiSlice.ts';
 import { BiSearch } from 'react-icons/bi';
-import LoadingPage from '../components/LoadingPage';
+import LoadingPage from '../components/LoadingPage.tsx';
 import RecipeCard from '../components/RecipeCard';
 import CategoryIcons from '../components/CategoryIcons.tsx';
 

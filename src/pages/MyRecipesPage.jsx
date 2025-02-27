@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useGetUserRecipesQuery } from '../features/api/recipesApiSlice.ts';
-import LoadingPage from '../components/LoadingPage';
+import LoadingPage from '../components/LoadingPage.tsx';
 import RecipeCard from '../components/RecipeCard';
 
 const MyRecipesPage = () => {

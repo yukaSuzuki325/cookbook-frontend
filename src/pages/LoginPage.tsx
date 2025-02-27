@@ -4,9 +4,9 @@ import { useAuthDispatch, useAuthSelector } from '../features/auth/hooks.ts';
 import { useLoginUserMutation } from '../features/api/usersApiSlice.ts';
 import { setCredentials } from '../features/auth/authSlice.ts';
 import { toast } from 'react-toastify';
-import LoadingPage from '../components/LoadingPage.jsx';
+import LoadingPage from '../components/LoadingPage.js';
 import AuthForm from '../components/AuthForm';
-import { type ApiError } from '../features/api/types';
+import { type ApiError } from '../types/apiTypes.ts';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });

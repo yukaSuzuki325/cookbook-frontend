@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { useRegisterUserMutation } from '../features/api/usersApiSlice.ts';
 import { setCredentials } from '../features/auth/authSlice.ts';
 import { toast } from 'react-toastify';
-import LoadingPage from '../components/LoadingPage';
+import LoadingPage from '../components/LoadingPage.tsx';
 import AuthForm from '../components/AuthForm';
-import { type ApiError } from '../features/api/types';
+import { type ApiError } from '../types/apiTypes.ts';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({

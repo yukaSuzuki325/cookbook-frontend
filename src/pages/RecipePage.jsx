@@ -1,10 +1,10 @@
 import { useParams, useLocation } from 'react-router-dom';
 import { useGetRecipeByIdQuery } from '../features/api/recipesApiSlice.ts';
-import LoadingPage from '../components/LoadingPage';
+import LoadingPage from '../components/LoadingPage.tsx';
 import { FaClock, FaUsers } from 'react-icons/fa';
 import { BiSolidCategory } from 'react-icons/bi';
 import { useEffect } from 'react';
-import BookmarkButton from '../components/BookmarkButton';
+import BookmarkButton from '../components/BookmarkButton.tsx';
 import ShareButton from '../components/ShareButton';
 
 const RecipePage = () => {
@@ -46,7 +46,7 @@ const RecipePage = () => {
           <h1 className="text-3xl font-bold">{title}</h1>
           <div className="flex gap-4">
             <ShareButton title={title} id={id} />
-            <BookmarkButton recipe={recipe} />
+            <BookmarkButton recipeId={recipe._id} />
           </div>
         </div>
 

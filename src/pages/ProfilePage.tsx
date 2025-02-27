@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { useUpdateUserMutation } from '../features/api/usersApiSlice.ts';
 import { setCredentials } from '../features/auth/authSlice.ts';
 import AuthForm from '../components/AuthForm';
-import { type ApiError } from '../features/api/types';
+import { type ApiError } from '../types/apiTypes.ts';
 
 const ProfilePage = () => {
   const [formData, setFormData] = useState({

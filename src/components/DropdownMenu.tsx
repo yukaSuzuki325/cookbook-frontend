@@ -1,19 +1,28 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useAuthDispatch, useAuthSelector } from '../features/auth/hooks.ts';
+import { Dispatch, SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLogoutUserMutation } from '../features/api/usersApiSlice.ts';
 import { removeCredentials } from '../features/auth/authSlice.ts';
 
-const DropdownMenu = ({ isDropDownOpen, setIsDropdownOpen }) => {
-  const { userInfo } = useSelector((store) => store.auth);
+interface DropdownMenuProps {
+  isDropDownOpen: boolean;
+  setIsDropdownOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+const DropdownMenu = ({
+  isDropDownOpen,
+  setIsDropdownOpen,
+}: DropdownMenuProps) => {
+  const { userInfo } = useAuthSelector((store) => store.auth);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAuthDispatch();
 
   const [logoutApiCall] = useLogoutUserMutation();
 
   const buttonClass =
     'block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100';
 
-  const handleClickMenu = (route) => {
+  const handleClickMenu = (route: string) => {
     setIsDropdownOpen((prev) => !prev);
     navigate(route);
   };

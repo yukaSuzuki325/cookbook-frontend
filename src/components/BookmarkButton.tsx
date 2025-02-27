@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useAuthSelector } from '../features/auth/hooks.ts';
 import { useNavigate } from 'react-router-dom';
 import {
   useBookmarkRecipeMutation,
@@ -6,10 +6,16 @@ import {
 } from '../features/api/recipesApiSlice.ts';
 import { toast } from 'react-toastify';
 import { FaHeart } from 'react-icons/fa6';
+import { type ApiError } from '../types/apiTypes.ts';
 
-const BookmarkButton = ({ recipe }) => {
-  const { userInfo } = useSelector((store) => store.auth);
-  const { _id: recipeId } = recipe;
+interface BookmarkButtonProps {
+  recipeId: string;
+}
+
+const BookmarkButton = ({ recipeId }: BookmarkButtonProps) => {
+  const { userInfo } = useAuthSelector((store) => store.auth);
+
+  console.log(recipeId);
 
   const [bookmarkRecipe, { isLoading: isMutating }] =
     useBookmarkRecipeMutation();
@@ -32,9 +38,11 @@ const BookmarkButton = ({ recipe }) => {
       const res = await bookmarkRecipe({ recipeId }).unwrap();
       toast.success(res.message);
       refetch(); // Refetch bookmark status to update UI
-    } catch (error) {
-      console.error('Error bookmarking recipe:', error);
-      toast.error(error?.data?.message || 'Failed to bookmark recipe.');
+    } catch (err: unknown) {
+      const error = err as ApiError;
+      toast.error(
+        error.data?.message || error.error || 'An unknown error occurred'
+      );
     }
   };
 

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { BiMenu, BiUserCircle } from 'react-icons/bi';
 import { MdRamenDining } from 'react-icons/md';
-import DropdownMenu from './DropdownMenu';
+import DropdownMenu from './DropdownMenu.tsx';
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

@@ -1,6 +1,6 @@
 import { useGetBookmarkedRecipesQuery } from '../features/api/recipesApiSlice.ts';
 import RecipeCard from '../components/RecipeCard';
-import LoadingPage from '../components/LoadingPage';
+import LoadingPage from '../components/LoadingPage.tsx';
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 

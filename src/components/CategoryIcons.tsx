@@ -1,16 +1,19 @@
 import { FaLeaf, FaFish, FaCarrot, FaDrumstickBite } from 'react-icons/fa';
 import { PiCookingPotFill } from 'react-icons/pi';
+import { JSX } from 'react';
+
+type CategoryType = 'All' | 'Vegan' | 'Vegetarian' | 'Fish' | 'Meat';
 
 interface CategoryIconsProps {
-  category: 'All' | 'Vegan' | 'Vegetarian' | 'Fish' | 'Meat';
-  setCategory: (category: string) => void;
+  category: CategoryType;
+  setCategory: (category: CategoryType) => void;
 }
 
 const CategoryIcons = ({ category, setCategory }: CategoryIconsProps) => {
   const baseButtonClass = 'flex flex-col items-center';
   const iconClass = 'text-3xl mb-2';
 
-  const buttonArray = [
+  const buttonArray: { name: CategoryType; icon: JSX.Element }[] = [
     { name: 'All', icon: <PiCookingPotFill className={iconClass} /> },
     { name: 'Vegan', icon: <FaLeaf className={iconClass} /> },
     { name: 'Vegetarian', icon: <FaCarrot className={iconClass} /> },
@@ -30,6 +33,7 @@ const CategoryIcons = ({ category, setCategory }: CategoryIconsProps) => {
             onClick={() => setCategory(name)}
           >
             {icon}
+            <p>{name}</p>
           </button>
         );
       })}

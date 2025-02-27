@@ -5,7 +5,7 @@ import {
 } from '../features/api/recipesApiSlice.ts';
 import { useParams, useNavigate } from 'react-router-dom';
 import { handleRecipeSubmit } from '../utils/recipeHelpers';
-import LoadingPage from '../components/LoadingPage';
+import LoadingPage from '../components/LoadingPage.tsx';
 import RecipeForm from '../components/RecipeForm';
 
 const EditRecipePage = () => {

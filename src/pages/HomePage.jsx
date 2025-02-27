@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { useGetRecipesQuery } from '../features/api/recipesApiSlice.ts';
 import { BiSearch } from 'react-icons/bi';
-import { FaLeaf, FaFish, FaCarrot, FaDrumstickBite } from 'react-icons/fa';
-import { PiCookingPotFill } from 'react-icons/pi';
 import LoadingPage from '../components/LoadingPage';
 import RecipeCard from '../components/RecipeCard';
+import CategoryIcons from '../components/CategoryIcons.tsx';
 
 const HomePage = () => {
   const { data: recipes = [], isLoading, isError } = useGetRecipesQuery();
@@ -41,54 +40,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Category Icons */}
-      <div className="flex justify-around mb-8">
-        <button
-          className={`flex flex-col items-center text-gray-600 ${
-            category === 'All' ? 'text-blue-500' : ''
-          }`}
-          onClick={() => setCategory('All')}
-        >
-          <PiCookingPotFill className="text-3xl mb-2" />
-          All
-        </button>
-        <button
-          className={`flex flex-col items-center text-gray-600 ${
-            category === 'Vegan' ? 'text-blue-500' : ''
-          }`}
-          onClick={() => setCategory('Vegan')}
-        >
-          <FaLeaf className="text-3xl mb-2" />
-          Vegan
-        </button>
-        <button
-          className={`flex flex-col items-center text-gray-600 ${
-            category === 'Vegetarian' ? 'text-blue-500' : ''
-          }`}
-          onClick={() => setCategory('Vegetarian')}
-        >
-          <FaCarrot className="text-3xl mb-2" />
-          Vegetarian
-        </button>
-        <button
-          className={`flex flex-col items-center text-gray-600 ${
-            category === 'Fish' ? 'text-blue-500' : ''
-          }`}
-          onClick={() => setCategory('Fish')}
-        >
-          <FaFish className="text-3xl mb-2" />
-          Fish
-        </button>
-        <button
-          className={`flex flex-col items-center text-gray-600 ${
-            category === 'Meat' ? 'text-blue-500' : ''
-          }`}
-          onClick={() => setCategory('Meat')}
-        >
-          <FaDrumstickBite className="text-3xl mb-2" />
-          Meat
-        </button>
-      </div>
+      <CategoryIcons category={category} setCategory={setCategory} />
 
       {/* Recipe Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

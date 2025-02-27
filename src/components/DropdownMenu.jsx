@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useLogoutUserMutation } from '../features/api/usersApiSlice';
-import { removeCredentials } from '../features/auth/authSlice';
+import { useLogoutUserMutation } from '../features/api/usersApiSlice.ts';
+import { removeCredentials } from '../features/auth/authSlice.ts';
 
 const DropdownMenu = ({ isDropDownOpen, setIsDropdownOpen }) => {
   const { userInfo } = useSelector((store) => store.auth);

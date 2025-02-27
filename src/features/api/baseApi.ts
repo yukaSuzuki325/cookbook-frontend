@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-// Define BASE_URL once and reuse it
+// Define BASE_URL dynamically based on the environment
 const BASE_URL =
   import.meta.env.MODE === 'development'
     ? 'http://localhost:8080/api'
@@ -10,7 +10,7 @@ const BASE_URL =
 export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
-    credentials: 'include', // Ensures cookies are sent with requests
+    credentials: 'include', // Ensure cookies are sent with requests
   }),
   endpoints: () => ({}), // Empty, will be extended by other API slices
 });

@@ -1,4 +1,4 @@
-import { baseApi } from './baseApi';
+import { baseApi } from './baseApi.ts';
 
 export const recipesApiSlice = baseApi.injectEndpoints({
   reducerPath: 'recipesApi',

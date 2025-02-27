@@ -8,13 +8,13 @@ import {
 } from 'react-router-dom';
 import './index.css';
 import { Provider } from 'react-redux';
-import store from './store.js';
+import store from './store.ts';
 import App from './App.jsx';
 import HomePage from './pages/HomePage.jsx';
 import RecipePage from './pages/RecipePage.jsx';
-import LoginPage from './pages/LoginPage.jsx';
-import RegisterPage from './pages/RegisterPage.jsx';
-import ProfilePage from './pages/ProfilePage.jsx';
+import LoginPage from './pages/LoginPage.tsx';
+import RegisterPage from './pages/RegisterPage.tsx';
+import ProfilePage from './pages/ProfilePage.tsx';
 import AddRecipePage from './pages/AddRecipePage.jsx';
 
 import EditRecipePage from './pages/EditRecipePage.jsx';

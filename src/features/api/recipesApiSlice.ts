@@ -1,36 +1,47 @@
-import { baseApi } from './baseApi.ts';
+import { baseApi } from './baseApi';
+import { type Recipe, type CreateRecipeRequest } from '../../types/recipeTypes';
 
 export const recipesApiSlice = baseApi.injectEndpoints({
-  reducerPath: 'recipesApi',
+  //reducerPath: 'recipesApi',
   endpoints: (builder) => ({
-    getRecipes: builder.query({
+    // ✅ Define the return type as an array of Recipe
+    getRecipes: builder.query<Recipe[], void>({
       query: () => '/recipes',
     }),
-    getRecipeById: builder.query({
+
+    getRecipeById: builder.query<Recipe, string>({
       query: (id) => `/recipes/${id}`,
     }),
-    bookmarkRecipe: builder.mutation({
-      query: ({ recipeId }) => ({
-        url: `/recipes/${recipeId}/bookmark`,
-        method: 'POST',
-      }),
-    }),
-    checkIfBookmarked: builder.query({
+
+    bookmarkRecipe: builder.mutation<{ message: string }, { recipeId: string }>(
+      {
+        query: ({ recipeId }) => ({
+          url: `/recipes/${recipeId}/bookmark`,
+          method: 'POST',
+        }),
+      }
+    ),
+
+    checkIfBookmarked: builder.query<{ bookmarked: boolean }, string>({
       query: (id) => `/recipes/${id}/bookmarked`,
     }),
-    getUserRecipes: builder.query({
+
+    getUserRecipes: builder.query<Recipe[], string>({
       query: (userId) => `/recipes/user/${userId}`,
     }),
-    getBookmarkedRecipes: builder.query({
+
+    getBookmarkedRecipes: builder.query<Recipe[], void>({
       query: () => '/recipes/bookmarked',
     }),
-    deleteRecipe: builder.mutation({
+
+    deleteRecipe: builder.mutation<{ message: string }, string>({
       query: (recipeId) => ({
         url: `/recipes/${recipeId}`,
         method: 'DELETE',
       }),
     }),
-    createRecipe: builder.mutation({
+
+    createRecipe: builder.mutation<{ message: string }, CreateRecipeRequest>({
       query: (recipe) => ({
         url: '/recipes',
         method: 'POST',
@@ -40,7 +51,11 @@ export const recipesApiSlice = baseApi.injectEndpoints({
         },
       }),
     }),
-    updateRecipe: builder.mutation({
+
+    updateRecipe: builder.mutation<
+      { message: string },
+      Partial<Recipe> & { id: string }
+    >({
       query: ({ id, ...recipe }) => ({
         url: `/recipes/${id}`,
         method: 'PUT',

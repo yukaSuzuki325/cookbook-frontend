@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useDeleteRecipeMutation } from '../features/api/recipesApiSlice';
+import { useDeleteRecipeMutation } from '../features/api/recipesApiSlice.ts';
 import { FaClock, FaEdit, FaTrash } from 'react-icons/fa';
 import { BiSolidCategory } from 'react-icons/bi';
 import { toast } from 'react-toastify';

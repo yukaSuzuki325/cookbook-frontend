@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useAuthDispatch, useAuthSelector } from '../features/auth/hooks.ts';
-import { type User } from '../features/api/usersApiSlice.ts';
-import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useUpdateUserMutation } from '../features/api/usersApiSlice.ts';
 import { setCredentials } from '../features/auth/authSlice.ts';

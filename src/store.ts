@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { usersApiSlice } from '../src/features/api/usersApiSlice.ts';
-import { recipesApiSlice } from '../src/features/api/recipesApiSlice';
+import { recipesApiSlice } from '../src/features/api/recipesApiSlice.ts';
 import { baseApi } from '../src/features/api/baseApi.ts';
 import authReducer from './features/auth/authSlice.ts';
 

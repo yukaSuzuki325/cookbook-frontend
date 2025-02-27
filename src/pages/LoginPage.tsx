@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAuthDispatch, useAuthSelector } from '../features/auth/hooks.ts';
 import { useLoginUserMutation } from '../features/api/usersApiSlice.ts';
 import { setCredentials } from '../features/auth/authSlice.ts';
 import { toast } from 'react-toastify';
-import LoadingPage from '../components/LoadingPage';
+import LoadingPage from '../components/LoadingPage.jsx';
 import AuthForm from '../components/AuthForm';
 import { type ApiError } from '../features/api/types';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const { email, password } = formData;
-  const dispatch = useDispatch();
+  const dispatch = useAuthDispatch();
   const navigate = useNavigate();
   const [login, { isLoading }] = useLoginUserMutation();
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useAuthSelector((state) => state.auth);
 
   useEffect(() => {
     if (userInfo) navigate('/');
@@ -28,7 +28,6 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
-      console.log('loggedin', res);
       dispatch(setCredentials(res));
       navigate('/');
     } catch (err: unknown) {

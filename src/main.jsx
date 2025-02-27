@@ -21,7 +21,7 @@ import EditRecipePage from './pages/EditRecipePage.jsx';
 import MyRecipesPage from './pages/MyRecipesPage.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
 import BookmarkedRecipesPage from './pages/BookmarkedRecipesPage.jsx';
-import NotFoundPage from './pages/NotFoundPage.jsx';
+import NotFoundPage from './pages/NotFoundPage.tsx';
 import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter(

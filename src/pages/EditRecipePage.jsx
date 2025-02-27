@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {
   useUpdateRecipeMutation,
   useGetRecipeByIdQuery,
-} from '../features/api/recipesApiSlice';
+} from '../features/api/recipesApiSlice.ts';
 import { useParams, useNavigate } from 'react-router-dom';
 import { handleRecipeSubmit } from '../utils/recipeHelpers';
 import LoadingPage from '../components/LoadingPage';

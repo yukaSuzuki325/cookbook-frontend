@@ -1,4 +1,4 @@
-import { useGetBookmarkedRecipesQuery } from '../features/api/recipesApiSlice';
+import { useGetBookmarkedRecipesQuery } from '../features/api/recipesApiSlice.ts';
 import RecipeCard from '../components/RecipeCard';
 import LoadingPage from '../components/LoadingPage';
 import { Link, useLocation } from 'react-router-dom';

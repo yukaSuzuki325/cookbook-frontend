@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   useBookmarkRecipeMutation,
   useCheckIfBookmarkedQuery,
-} from '../features/api/recipesApiSlice';
+} from '../features/api/recipesApiSlice.ts';
 import { toast } from 'react-toastify';
 import { FaHeart } from 'react-icons/fa6';
 

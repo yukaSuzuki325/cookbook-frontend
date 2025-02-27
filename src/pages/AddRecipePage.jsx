@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useCreateRecipeMutation } from '../features/api/recipesApiSlice';
+import { useCreateRecipeMutation } from '../features/api/recipesApiSlice.ts';
 import { useNavigate } from 'react-router-dom';
 import RecipeForm from '../components/RecipeForm';
 import { handleRecipeSubmit } from '../utils/recipeHelpers';

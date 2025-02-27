@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useAuthDispatch, useAuthSelector } from '../features/auth/hooks.ts';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { useRegisterUserMutation } from '../features/api/usersApiSlice.ts';
 import { setCredentials } from '../features/auth/authSlice.ts';
 import { toast } from 'react-toastify';
@@ -18,10 +18,10 @@ const RegisterPage = () => {
 
   const { name, email, password, confirmPassword } = formData;
 
-  const dispatch = useDispatch();
+  const dispatch = useAuthDispatch();
+  const { userInfo } = useAuthSelector((store) => store.auth);
   const navigate = useNavigate();
   const [register, { isLoading }] = useRegisterUserMutation();
-  const { userInfo } = useSelector((store) => store.auth);
 
   useEffect(() => {
     if (userInfo) navigate('/');

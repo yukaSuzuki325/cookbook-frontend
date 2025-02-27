@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useGetRecipesQuery } from '../features/api/recipesApiSlice';
+import { useGetRecipesQuery } from '../features/api/recipesApiSlice.ts';
 import { BiSearch } from 'react-icons/bi';
 import { FaLeaf, FaFish, FaCarrot, FaDrumstickBite } from 'react-icons/fa';
 import { PiCookingPotFill } from 'react-icons/pi';
@@ -10,6 +10,8 @@ const HomePage = () => {
   const { data: recipes = [], isLoading, isError } = useGetRecipesQuery();
   const [category, setCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+
+  console.log(recipes[0]);
 
   // Filter recipes by category and search query
   const filteredRecipes = recipes.filter((recipe) => {

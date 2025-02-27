@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useAuthDispatch, useAuthSelector } from '../features/auth/hooks.ts';
+import { type User } from '../features/api/usersApiSlice.ts';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useUpdateUserMutation } from '../features/api/usersApiSlice.ts';
@@ -16,21 +18,27 @@ const ProfilePage = () => {
 
   const { name, email, password, confirmPassword } = formData;
 
-  const { userInfo } = useSelector((store) => store.auth);
-
-  const dispatch = useDispatch();
+  const { userInfo } = useAuthSelector((store) => store.auth);
+  const dispatch = useAuthDispatch();
 
   const [updateProfile, { isLoading }] = useUpdateUserMutation();
 
   useEffect(() => {
-    setFormData({ ...formData, name: userInfo.name, email: userInfo.email });
-  }, [userInfo.email, userInfo.name]);
+    setFormData({
+      ...formData,
+      name: userInfo?.name || '',
+      email: userInfo?.email || '',
+    });
+  }, [userInfo?.email, userInfo?.name]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
     } else {
+      if (!userInfo?._id) {
+        throw new Error('User ID is missing');
+      }
       try {
         const res = await updateProfile({
           name,

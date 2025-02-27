@@ -30,7 +30,7 @@ const BookmarkButton = ({ recipe }) => {
 
     try {
       const res = await bookmarkRecipe({ recipeId }).unwrap();
-      toast.success(res.message); // Message comes from backend: "Bookmark added/removed successfully."
+      toast.success(res.message);
       refetch(); // Refetch bookmark status to update UI
     } catch (error) {
       console.error('Error bookmarking recipe:', error);

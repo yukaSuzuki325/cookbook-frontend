@@ -10,6 +10,9 @@ const DropdownMenu = ({ isDropDownOpen, setIsDropdownOpen }) => {
 
   const [logoutApiCall] = useLogoutUserMutation();
 
+  const buttonClass =
+    'block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100';
+
   const handleClickMenu = (route) => {
     setIsDropdownOpen((prev) => !prev);
     navigate(route);
@@ -30,51 +33,40 @@ const DropdownMenu = ({ isDropDownOpen, setIsDropdownOpen }) => {
     <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-md border">
       {userInfo ? (
         <>
-          <button
-            className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-            onClick={() => handleClickMenu('/recipes/add')}
-          >
-            Add Recipe
-          </button>
-          <button
-            className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-            onClick={() => handleClickMenu('/recipes/bookmarked')}
-          >
-            Bookmarks
-          </button>
-          <button
-            className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-            onClick={() => handleClickMenu('/recipes/my-recipes')}
-          >
-            My Recipes
-          </button>
-          <button
-            className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-            onClick={() => handleClickMenu('/profile')}
-          >
-            Profile
-          </button>
-          <button
-            className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-            onClick={logoutHandler}
-          >
-            Logout
-          </button>
+          {[
+            { name: 'Add Recipe', link: '/recipes/add' },
+            { name: 'Bookmarks', link: '/recipes/bookmarked' },
+            { name: 'My Recipes', link: '/recipes/my-recipes' },
+            { name: 'Profile', link: '/profile' },
+            { name: 'Logout', link: '' },
+          ].map(({ name, link }) => (
+            <button
+              key={name}
+              className={buttonClass}
+              onClick={() => {
+                name !== 'Logout' ? handleClickMenu(link) : logoutHandler();
+              }}
+            >
+              {name}
+            </button>
+          ))}
         </>
       ) : (
         <>
-          <button
-            className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-            onClick={() => handleClickMenu('/login')}
-          >
-            Login
-          </button>
-          <button
-            className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-            onClick={() => handleClickMenu('/register')}
-          >
-            Register
-          </button>
+          {[
+            { name: 'Login', link: '/login' },
+            { name: 'Register', link: '/register' },
+          ].map(({ name, link }) => (
+            <button
+              key={name}
+              className={buttonClass}
+              onClick={() => {
+                handleClickMenu(link);
+              }}
+            >
+              {name}
+            </button>
+          ))}
         </>
       )}
     </div>

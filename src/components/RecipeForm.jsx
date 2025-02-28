@@ -81,7 +81,7 @@ const RecipeForm = ({
               <button
                 type="button"
                 onClick={addIngredient}
-                className="flex items-center justify-center w-10 h-10 bg-white text-orange-500 border border-gray-200 rounded hover:border-orange-400"
+                className="flex items-center justify-center w-10 h-10 border border-orange-300 rounded text-orange-500 bg-white hover:bg-orange-100"
               >
                 <FiPlus size={20} />
               </button>

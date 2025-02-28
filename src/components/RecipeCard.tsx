@@ -3,6 +3,19 @@ import { useDeleteRecipeMutation } from '../features/api/recipesApiSlice.ts';
 import { FaClock, FaEdit, FaTrash } from 'react-icons/fa';
 import { BiSolidCategory } from 'react-icons/bi';
 import { toast } from 'react-toastify';
+import IconButton from './IconButton.tsx';
+import { ApiError } from '../types/apiTypes.ts';
+import React from 'react';
+
+interface RecipeCardProps {
+  title: string;
+  category: string;
+  imageUrl: string;
+  _id: string;
+  cookingTime: number;
+  showActions?: boolean;
+  onRecipeDeleted?: () => void;
+}
 
 const RecipeCard = ({
   title,
@@ -10,19 +23,18 @@ const RecipeCard = ({
   imageUrl,
   _id,
   cookingTime,
-  description,
   showActions,
   onRecipeDeleted,
-}) => {
+}: RecipeCardProps) => {
   const [deleteRecipe] = useDeleteRecipeMutation();
   const navigate = useNavigate();
 
-  const handleEdit = (e) => {
+  const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     navigate(`/recipes/${_id}/edit`);
   };
 
-  const handleDelete = async (e) => {
+  const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (window.confirm('Are you sure you want to delete this recipe?')) {
       try {
@@ -30,9 +42,15 @@ const RecipeCard = ({
 
         const res = await deleteRecipe(_id).unwrap();
         toast.success(res.message);
-        onRecipeDeleted(); //Call refetch in MyRecipePage component
-      } catch (error) {
-        toast.error(error?.data?.message || 'Failed to delete the recipe.');
+
+        if (onRecipeDeleted) {
+          onRecipeDeleted();
+        }
+      } catch (err: unknown) {
+        const error = err as ApiError;
+        toast.error(
+          error.data?.message || error.error || 'An unknown error occurred'
+        );
       }
     }
   };
@@ -59,18 +77,16 @@ const RecipeCard = ({
         </p>
         {showActions && (
           <div className="flex justify-end gap-2 mt-4">
-            <button
+            <IconButton
               onClick={handleEdit}
-              className="flex items-center justify-center w-10 h-10 border border-orange-300 rounded text-orange-500 bg-white hover:bg-orange-100"
-            >
-              <FaEdit size={16} />
-            </button>
-            <button
+              icon={<FaEdit size={16} />}
+              ariaLabel="Edit recipe"
+            />
+            <IconButton
               onClick={handleDelete}
-              className="flex items-center justify-center w-10 h-10 border border-orange-300 rounded text-orange-500 bg-white hover:bg-orange-100"
-            >
-              <FaTrash size={16} />
-            </button>
+              icon={<FaTrash size={16} />}
+              ariaLabel="Delete recipe"
+            />
           </div>
         )}
       </div>

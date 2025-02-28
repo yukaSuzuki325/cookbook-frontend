@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useGetUserRecipesQuery } from '../features/api/recipesApiSlice.ts';
 import LoadingPage from '../components/LoadingPage.tsx';
-import RecipeCard from '../components/RecipeCard';
+import RecipeCard from '../components/RecipeCard.tsx';
 
 const MyRecipesPage = () => {
   const { userInfo } = useSelector((store) => store.auth);

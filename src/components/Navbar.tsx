@@ -1,20 +1,24 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useAuthSelector } from '../features/auth/hooks.ts';
 import { BiMenu, BiUserCircle } from 'react-icons/bi';
 import { MdRamenDining } from 'react-icons/md';
 import DropdownMenu from './DropdownMenu.tsx';
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null); //Since dropdownRef refers to a div
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useAuthSelector((state) => state.auth);
 
   const navigate = useNavigate();
 
-  const handleOutsideClick = (e) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+  const handleOutsideClick = (e: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      e.target instanceof Node && // Ensures e.target is a valid Node
+      !dropdownRef.current.contains(e.target)
+    ) {
       setIsDropdownOpen(false);
     }
   };
@@ -25,6 +29,13 @@ const Navbar = () => {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
+
+  //Define the userOnMenu element to render depending on login status
+  let userOnMenu: ReactNode = userInfo ? (
+    <div className="text-gray-600">{userInfo.name}</div>
+  ) : (
+    <BiUserCircle className="text-orange-500 text-xl" />
+  );
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
@@ -45,14 +56,9 @@ const Navbar = () => {
             onClick={() => setIsDropdownOpen((prev) => !prev)}
           >
             <BiMenu className="text-orange-600 text-xl" />
-            {userInfo ? (
-              <div className="text-gray-600">{userInfo.name}</div>
-            ) : (
-              <BiUserCircle className="text-orange-500 text-xl" />
-            )}
+            {userOnMenu}
           </button>
 
-          {/* Dropdown Menu */}
           {isDropdownOpen && (
             <DropdownMenu
               isDropdownOpen={isDropdownOpen}

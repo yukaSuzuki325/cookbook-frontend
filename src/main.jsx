@@ -16,10 +16,9 @@ import LoginPage from './pages/LoginPage.tsx';
 import RegisterPage from './pages/RegisterPage.tsx';
 import ProfilePage from './pages/ProfilePage.tsx';
 import AddRecipePage from './pages/AddRecipePage.jsx';
-
 import EditRecipePage from './pages/EditRecipePage.jsx';
 import MyRecipesPage from './pages/MyRecipesPage.jsx';
-import PrivateRoute from './components/PrivateRoute.jsx';
+import PrivateRoute from './components/PrivateRoute.tsx';
 import BookmarkedRecipesPage from './pages/BookmarkedRecipesPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.tsx';
 import ErrorPage from './pages/ErrorPage';

@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useCreateRecipeMutation } from '../features/api/recipesApiSlice.ts';
 import { useNavigate } from 'react-router-dom';
-import RecipeForm from '../components/RecipeForm.tsx';
+import RecipeForm, { RecipeFormData } from '../components/RecipeForm.tsx';
 import { handleRecipeSubmit } from '../utils/recipeHelpers.ts';
 
 const AddRecipePage = () => {
   const [createRecipe, { isLoading }] = useCreateRecipeMutation();
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<RecipeFormData>({
     title: '',
     description: '',
     cookingTime: 0,

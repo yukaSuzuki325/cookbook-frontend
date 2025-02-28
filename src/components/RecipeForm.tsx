@@ -18,7 +18,7 @@ export interface RecipeFormData {
   cookingTime: number;
   servings: number;
   category: string;
-  imageUrl?: string;
+  imageUrl: string;
   steps: string | RecipeStep[];
 }
 
@@ -125,13 +125,9 @@ const RecipeForm = ({
             ))}
             <div className="flex flex-row-reverse">
               <IconButton
-                icon={
-                  <FiPlus
-                    size={20}
-                    onClick={addIngredient}
-                    ariaLabel="Add ingredient"
-                  />
-                }
+                icon={<FiPlus size={20} />}
+                onClick={addIngredient}
+                ariaLabel="Add ingredient"
               />
             </div>
           </div>
@@ -139,7 +135,11 @@ const RecipeForm = ({
             <label className={labelClass}>Steps (one per line)</label>
             <textarea
               name="steps"
-              value={formData.steps}
+              value={
+                Array.isArray(formData.steps)
+                  ? formData.steps.map((step) => step.instruction).join('\n') // Convert array to string
+                  : formData.steps
+              }
               onChange={handleChange}
               className={inputClass}
               required
@@ -188,7 +188,7 @@ const RecipeForm = ({
             type="text"
             label="Image URL (optional)"
             name="imageUrl"
-            value={formData.imageUrl}
+            value={formData.imageUrl ?? ''}
             onChange={handleChange}
           />
 

@@ -7,6 +7,7 @@ export const handleRecipeSubmit = async ({
   action, // createRecipe or updateRecipe mutation
   navigate,
 }) => {
+  console.log('handle');
   if (!formData.imageUrl) {
     formData.imageUrl =
       'https://res.cloudinary.com/dcklvu8tf/image/upload/v1739442214/cookbook/spices.jpg';

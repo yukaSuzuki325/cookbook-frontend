@@ -1,15 +1,16 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   useUpdateRecipeMutation,
   useGetRecipeByIdQuery,
 } from '../features/api/recipesApiSlice.ts';
 import { useParams, useNavigate } from 'react-router-dom';
-import { handleRecipeSubmit } from '../utils/recipeHelpers';
+import { handleRecipeSubmit } from '../utils/recipeHelpers.js';
 import LoadingPage from '../components/LoadingPage.tsx';
-import RecipeForm from '../components/RecipeForm';
+import RecipeForm from '../components/RecipeForm.tsx';
 
 const EditRecipePage = () => {
-  const { id: recipeId } = useParams();
+  const { id } = useParams();
+  const recipeId = id ?? '';
   const { data: recipe, isLoading, isError } = useGetRecipeByIdQuery(recipeId);
   const [updateRecipe, { isLoading: isUpdating }] = useUpdateRecipeMutation();
 
@@ -18,8 +19,8 @@ const EditRecipePage = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    cookingTime: '',
-    servings: '',
+    cookingTime: 0,
+    servings: 0,
     category: '',
     steps: '',
     imageUrl: '',
@@ -48,7 +49,7 @@ const EditRecipePage = () => {
     }
   }, [recipe]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     await handleRecipeSubmit({

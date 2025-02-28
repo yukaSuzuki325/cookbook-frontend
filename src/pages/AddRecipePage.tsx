@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useCreateRecipeMutation } from '../features/api/recipesApiSlice.ts';
 import { useNavigate } from 'react-router-dom';
-import RecipeForm from '../components/RecipeForm';
-import { handleRecipeSubmit } from '../utils/recipeHelpers';
+import RecipeForm from '../components/RecipeForm.tsx';
+import { handleRecipeSubmit } from '../utils/recipeHelpers.js';
 
 const AddRecipePage = () => {
   const [createRecipe, { isLoading }] = useCreateRecipeMutation();
@@ -11,8 +11,8 @@ const AddRecipePage = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    cookingTime: '',
-    servings: '',
+    cookingTime: 0,
+    servings: 0,
     category: '',
     imageUrl: '',
     steps: '',
@@ -20,7 +20,7 @@ const AddRecipePage = () => {
 
   const [ingredients, setIngredients] = useState([{ name: '', quantity: '' }]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     await handleRecipeSubmit({

@@ -15,13 +15,13 @@ import RecipePage from './pages/RecipePage.jsx';
 import LoginPage from './pages/LoginPage.tsx';
 import RegisterPage from './pages/RegisterPage.tsx';
 import ProfilePage from './pages/ProfilePage.tsx';
-import AddRecipePage from './pages/AddRecipePage.jsx';
-import EditRecipePage from './pages/EditRecipePage.jsx';
+import AddRecipePage from './pages/AddRecipePage.tsx';
+import EditRecipePage from './pages/EditRecipePage.tsx';
 import MyRecipesPage from './pages/MyRecipesPage.jsx';
 import PrivateRoute from './components/PrivateRoute.tsx';
 import BookmarkedRecipesPage from './pages/BookmarkedRecipesPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.tsx';
-import ErrorPage from './pages/ErrorPage';
+import ErrorPage from './pages/ErrorPage.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

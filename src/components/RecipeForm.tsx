@@ -2,22 +2,29 @@ import { FiPlus } from 'react-icons/fi';
 import IconButton from './IconButton.tsx';
 import FormInput from './FormInput.tsx';
 
-interface Ingredient {
+export interface Ingredient {
   name: string;
   quantity: string;
 }
 
+export interface RecipeStep {
+  stepNumber: number;
+  instruction: string;
+}
+
+export interface RecipeFormData {
+  title: string;
+  description: string;
+  cookingTime: number;
+  servings: number;
+  category: string;
+  imageUrl?: string;
+  steps: string | RecipeStep[];
+}
+
 interface RecipeFormProps {
   pageTitle: string;
-  formData: {
-    title: string;
-    description: string;
-    cookingTime: number;
-    servings: number;
-    category: string;
-    imageUrl: string;
-    steps: string;
-  };
+  formData: RecipeFormData;
   setFormData: React.Dispatch<
     React.SetStateAction<RecipeFormProps['formData']>
   >;

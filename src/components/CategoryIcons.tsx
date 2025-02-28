@@ -2,7 +2,7 @@ import { FaLeaf, FaFish, FaCarrot, FaDrumstickBite } from 'react-icons/fa';
 import { PiCookingPotFill } from 'react-icons/pi';
 import { JSX } from 'react';
 
-type CategoryType = 'All' | 'Vegan' | 'Vegetarian' | 'Fish' | 'Meat';
+export type CategoryType = 'All' | 'Vegan' | 'Vegetarian' | 'Fish' | 'Meat';
 
 interface CategoryIconsProps {
   category: CategoryType;

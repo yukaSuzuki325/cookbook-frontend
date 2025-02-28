@@ -9,7 +9,12 @@ import {
   WhatsappIcon,
 } from 'react-share';
 
-const ShareButton = ({ title, id }) => {
+interface ShareButtonProps {
+  title: string;
+  id: string;
+}
+
+const ShareButton = ({ title, id }: ShareButtonProps) => {
   const [showShareOptions, setShowShareOptions] = useState(false);
   const shareUrl = `https://amazingcookbook.netlify.app/recipes/${id}`;
 
@@ -23,7 +28,7 @@ const ShareButton = ({ title, id }) => {
       </button>
       {showShareOptions && (
         <div className="absolute right-0 top-0 -translate-y-full bg-white rounded-lg p-2 flex  gap-2">
-          <FacebookShareButton url={shareUrl} quote={title}>
+          <FacebookShareButton url={shareUrl}>
             <FacebookIcon size={30} round={true} />
           </FacebookShareButton>
 

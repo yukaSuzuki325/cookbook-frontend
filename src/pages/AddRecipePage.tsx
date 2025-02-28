@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useCreateRecipeMutation } from '../features/api/recipesApiSlice.ts';
 import { useNavigate } from 'react-router-dom';
 import RecipeForm from '../components/RecipeForm.tsx';
-import { handleRecipeSubmit } from '../utils/recipeHelpers.js';
+import { handleRecipeSubmit } from '../utils/recipeHelpers.ts';
 
 const AddRecipePage = () => {
   const [createRecipe, { isLoading }] = useCreateRecipeMutation();

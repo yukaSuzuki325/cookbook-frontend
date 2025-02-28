@@ -1,13 +1,17 @@
-import { useSelector } from 'react-redux';
+import { useAuthSelector } from '../features/auth/hooks.ts';
 import { useGetUserRecipesQuery } from '../features/api/recipesApiSlice.ts';
 import LoadingPage from '../components/LoadingPage.tsx';
 import RecipeCard from '../components/RecipeCard.tsx';
 
 const MyRecipesPage = () => {
-  const { userInfo } = useSelector((store) => store.auth);
+  const { userInfo } = useAuthSelector((store) => store.auth);
+
+  if (!userInfo) {
+    return <p>You must be logged in to view your recipes.</p>;
+  }
   const { _id: userId } = userInfo;
   const {
-    data: recipes,
+    data: recipes = [],
     isLoading,
     isError,
     refetch,

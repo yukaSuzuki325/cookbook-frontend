@@ -1,13 +1,11 @@
 import { useGetBookmarkedRecipesQuery } from '../features/api/recipesApiSlice.ts';
 import RecipeCard from '../components/RecipeCard.tsx';
 import LoadingPage from '../components/LoadingPage.tsx';
-import { Link, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 const BookmarkedRecipesPage = () => {
-  const { state } = useLocation();
   const {
-    data: recipes,
+    data: recipes = [],
     isLoading,
     isError,
     refetch,

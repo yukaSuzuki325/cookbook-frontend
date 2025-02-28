@@ -5,17 +5,20 @@ import { FaClock, FaUsers } from 'react-icons/fa';
 import { BiSolidCategory } from 'react-icons/bi';
 import { useEffect } from 'react';
 import BookmarkButton from '../components/BookmarkButton.tsx';
-import ShareButton from '../components/ShareButton';
+import ShareButton from '../components/ShareButton.tsx';
 
 const RecipePage = () => {
+  console.log(useParams());
+
   const { id } = useParams();
+  const recipeId = id ?? '';
   const { state } = useLocation();
   const {
     data: recipe,
     isLoading,
     isError,
     refetch,
-  } = useGetRecipeByIdQuery(id);
+  } = useGetRecipeByIdQuery(recipeId);
 
   useEffect(() => {
     if (state?.refetch) {
@@ -45,7 +48,7 @@ const RecipePage = () => {
         <div className="flex justify-between items-center mb-4 flex-wrap">
           <h1 className="text-3xl font-bold">{title}</h1>
           <div className="flex gap-4">
-            <ShareButton title={title} id={id} />
+            <ShareButton title={title} id={recipeId} />
             <BookmarkButton recipeId={recipe._id} />
           </div>
         </div>

@@ -4,7 +4,7 @@ import {
   useGetRecipeByIdQuery,
 } from '../features/api/recipesApiSlice.ts';
 import { useParams, useNavigate } from 'react-router-dom';
-import { handleRecipeSubmit } from '../utils/recipeHelpers.js';
+import { handleRecipeSubmit } from '../utils/recipeHelpers.ts';
 import LoadingPage from '../components/LoadingPage.tsx';
 import RecipeForm from '../components/RecipeForm.tsx';
 

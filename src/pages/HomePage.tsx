@@ -3,11 +3,11 @@ import { useGetRecipesQuery } from '../features/api/recipesApiSlice.ts';
 import { BiSearch } from 'react-icons/bi';
 import LoadingPage from '../components/LoadingPage.tsx';
 import RecipeCard from '../components/RecipeCard.tsx';
-import CategoryIcons from '../components/CategoryIcons.tsx';
+import CategoryIcons, { CategoryType } from '../components/CategoryIcons.tsx';
 
 const HomePage = () => {
   const { data: recipes = [], isLoading, isError } = useGetRecipesQuery();
-  const [category, setCategory] = useState('All');
+  const [category, setCategory] = useState<CategoryType>('All');
   const [searchQuery, setSearchQuery] = useState('');
 
   console.log(recipes[0]);

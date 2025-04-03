@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useGetRecipesQuery } from '../features/api/recipesApiSlice.ts';
 import { BiSearch } from 'react-icons/bi';
 import LoadingPage from '../components/LoadingPage.tsx';
@@ -6,7 +6,12 @@ import RecipeCard from '../components/RecipeCard.tsx';
 import CategoryIcons, { CategoryType } from '../components/CategoryIcons.tsx';
 
 const HomePage = () => {
-  const { data: recipes = [], isLoading, isError } = useGetRecipesQuery();
+  const {
+    data: recipes = [],
+    isLoading,
+    isError,
+    error,
+  } = useGetRecipesQuery();
   const [category, setCategory] = useState<CategoryType>('All');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -19,8 +24,13 @@ const HomePage = () => {
     return matchesCategory && matchesSearchQuery;
   });
 
+  useEffect(() => {
+    if (isError) {
+      throw error;
+    }
+  }, [isError, error]);
+
   if (isLoading) return <LoadingPage />;
-  if (isError) return <div>Error fetching recipes.</div>;
 
   return (
     <div className="container mx-auto">

@@ -1,4 +1,5 @@
 import React from 'react';
+import ActionButton from './ActionButton';
 
 interface FormField {
   id: string;
@@ -54,12 +55,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
               />
             </div>
           ))}
-          <button
-            type="submit"
-            className="py-2 px-4 text-white bg-orange-500 rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2"
-          >
-            {buttonText}
-          </button>
+          <ActionButton buttonText={buttonText} />
         </form>
         {bottomText && bottomLinkText && bottomLinkHref && (
           <p className="text-sm text-gray-600 mt-4">

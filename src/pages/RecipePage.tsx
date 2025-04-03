@@ -8,8 +8,6 @@ import BookmarkButton from '../components/BookmarkButton.tsx';
 import ShareButton from '../components/ShareButton.tsx';
 
 const RecipePage = () => {
-  console.log(useParams());
-
   const { id } = useParams();
   const recipeId = id ?? '';
   const { state } = useLocation();

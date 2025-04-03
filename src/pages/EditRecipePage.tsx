@@ -6,7 +6,7 @@ import {
 import { useParams, useNavigate } from 'react-router-dom';
 import { handleRecipeSubmit } from '../utils/recipeHelpers.ts';
 import LoadingPage from '../components/LoadingPage.tsx';
-import RecipeForm from '../components/RecipeForm.tsx';
+import RecipeForm, { type RecipeFormData } from '../components/RecipeForm.tsx';
 
 const EditRecipePage = () => {
   const { id } = useParams();
@@ -16,7 +16,7 @@ const EditRecipePage = () => {
 
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<RecipeFormData>({
     title: '',
     description: '',
     cookingTime: 0,

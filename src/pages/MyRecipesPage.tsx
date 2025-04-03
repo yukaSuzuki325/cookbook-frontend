@@ -2,6 +2,7 @@ import { useAuthSelector } from '../features/auth/hooks.ts';
 import { useGetUserRecipesQuery } from '../features/api/recipesApiSlice.ts';
 import LoadingPage from '../components/LoadingPage.tsx';
 import RecipeCard from '../components/RecipeCard.tsx';
+import { useEffect } from 'react';
 
 const MyRecipesPage = () => {
   const { userInfo } = useAuthSelector((store) => store.auth);
@@ -15,12 +16,16 @@ const MyRecipesPage = () => {
     isLoading,
     isError,
     refetch,
+    error,
   } = useGetUserRecipesQuery(userId);
 
-  console.log(recipes);
+  useEffect(() => {
+    if (isError) {
+      throw error;
+    }
+  }, [isError, error]);
 
   if (isLoading) return <LoadingPage />;
-  if (isError) return <p>Error fetching your recipes</p>;
 
   return (
     <div className="container mx-auto">

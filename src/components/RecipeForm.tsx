@@ -1,6 +1,7 @@
 import { FiPlus } from 'react-icons/fi';
 import IconButton from './IconButton.tsx';
 import FormInput from './FormInput.tsx';
+import ActionButton from './ActionButton.tsx';
 
 export interface Ingredient {
   name: string;
@@ -192,13 +193,7 @@ const RecipeForm = ({
             onChange={handleChange}
           />
 
-          <button
-            type="submit"
-            className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
-            disabled={isLoading}
-          >
-            {isLoading ? 'Submitting...' : buttonText}
-          </button>
+          <ActionButton isLoading={isLoading} buttonText={buttonText} />
         </form>
       </div>
     </>

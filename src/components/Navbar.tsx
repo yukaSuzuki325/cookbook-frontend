@@ -6,13 +6,18 @@ import { MdRamenDining } from 'react-icons/md';
 import DropdownMenu from './DropdownMenu.tsx';
 
 const Navbar = () => {
+  // Track whether the dropdown menu is open
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement | null>(null); //Since dropdownRef refers to a div
 
+  // Ref to detect outside clicks on the dropdown
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+  // Get current user info from Redux store
   const { userInfo } = useAuthSelector((state) => state.auth);
 
   const navigate = useNavigate();
 
+  // Close the dropdown if the user clicks outside of it
   const handleOutsideClick = (e: MouseEvent) => {
     if (
       dropdownRef.current &&
@@ -23,6 +28,7 @@ const Navbar = () => {
     }
   };
 
+  // Add and clean up the outside click event listener
   useEffect(() => {
     document.addEventListener('mousedown', handleOutsideClick);
     return () => {
@@ -30,7 +36,7 @@ const Navbar = () => {
     };
   }, []);
 
-  //Define the userOnMenu element to render depending on login status
+  // Conditionally render either the user's name or a user icon depending on auth status
   let userOnMenu: ReactNode = userInfo ? (
     <div className="text-gray-600">{userInfo.name}</div>
   ) : (

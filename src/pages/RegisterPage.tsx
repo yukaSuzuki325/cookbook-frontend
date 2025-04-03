@@ -9,6 +9,7 @@ import AuthForm from '../components/AuthForm';
 import { type ApiError } from '../types/apiTypes.ts';
 
 const RegisterPage = () => {
+  // Local state to manage the values of the registration form
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,14 +24,17 @@ const RegisterPage = () => {
   const navigate = useNavigate();
   const [register, { isLoading }] = useRegisterUserMutation();
 
+  // If user is already logged in, redirect to homepage
   useEffect(() => {
     if (userInfo) navigate('/');
   }, [userInfo, navigate]);
 
+  // Update form state when input fields change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -38,7 +42,9 @@ const RegisterPage = () => {
     } else {
       try {
         const res = await register({ name, email, password }).unwrap();
+        // Save credentials to Redux store
         dispatch(setCredentials(res));
+        // Redirect to homepage after successful registration
         navigate('/');
       } catch (err: unknown) {
         const error = err as ApiError;

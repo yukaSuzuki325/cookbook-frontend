@@ -9,13 +9,19 @@ import LoadingPage from '../components/LoadingPage.tsx';
 import RecipeForm, { type RecipeFormData } from '../components/RecipeForm.tsx';
 
 const EditRecipePage = () => {
+  // Get the recipe ID from the URL parameters
   const { id } = useParams();
   const recipeId = id ?? '';
+
+  // Fetch the existing recipe data by ID
   const { data: recipe, isLoading, isError } = useGetRecipeByIdQuery(recipeId);
+
+  // Set up mutation hook for updating a recipe
   const [updateRecipe, { isLoading: isUpdating }] = useUpdateRecipeMutation();
 
   const navigate = useNavigate();
 
+  // State for main recipe fields
   const [formData, setFormData] = useState<RecipeFormData>({
     title: '',
     description: '',
@@ -26,6 +32,7 @@ const EditRecipePage = () => {
     imageUrl: '',
   });
 
+  // State for the ingredients list
   const [ingredients, setIngredients] = useState([
     {
       name: '',
@@ -33,7 +40,7 @@ const EditRecipePage = () => {
     },
   ]);
 
-  //Update formData value with the fetched recipe data, only the data becomes available
+  // When the recipe data has been fetched, populate the form and ingredients states
   useEffect(() => {
     if (recipe) {
       setFormData({
@@ -43,12 +50,15 @@ const EditRecipePage = () => {
         servings: recipe.servings,
         category: recipe.category,
         imageUrl: recipe.imageUrl,
+        // Convert array of step objects into a single string separated by newlines
         steps: recipe.steps.map((step) => step.instruction).join('\n'),
       });
+      // Set ingredients directly from fetched recipe
       setIngredients(recipe.ingredients);
     }
   }, [recipe]);
 
+  // Handle the form submission for updating the recipe
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 

@@ -16,21 +16,29 @@ const LoginPage = () => {
   const [login, { isLoading }] = useLoginUserMutation();
   const { userInfo } = useAuthSelector((state) => state.auth);
 
+  // Redirect to homepage if already logged in
   useEffect(() => {
     if (userInfo) navigate('/');
   }, [userInfo, navigate]);
 
+  // Update formData state on input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle form submission for login
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
+
+      // Save credentials to Redux store
       dispatch(setCredentials(res));
+
+      // Redirect to homepage
       navigate('/');
     } catch (err: unknown) {
+      // Show error toast if login fails
       const error = err as ApiError;
       toast.error(
         error.data?.message || error.error || 'An unknown error occurred'

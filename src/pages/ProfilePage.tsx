@@ -7,6 +7,7 @@ import AuthForm from '../components/AuthForm';
 import { type ApiError } from '../types/apiTypes.ts';
 
 const ProfilePage = () => {
+  // Local form state for profile data
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,11 +17,14 @@ const ProfilePage = () => {
 
   const { name, email, password, confirmPassword } = formData;
 
+  // Access user info from Redux auth state
   const { userInfo } = useAuthSelector((store) => store.auth);
   const dispatch = useAuthDispatch();
 
+  // RTK Query mutation for updating user profile
   const [updateProfile, { isLoading }] = useUpdateUserMutation();
 
+  // Populate form fields with current user info when available
   useEffect(() => {
     setFormData({
       ...formData,
@@ -29,6 +33,7 @@ const ProfilePage = () => {
     });
   }, [userInfo?.email, userInfo?.name]);
 
+  // Handle form submission for updating profile
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -38,6 +43,7 @@ const ProfilePage = () => {
         throw new Error('User ID is missing');
       }
       try {
+        // Send update request with current form values and user ID
         const res = await updateProfile({
           name,
           email,
@@ -45,6 +51,7 @@ const ProfilePage = () => {
           _id: userInfo._id,
         }).unwrap();
 
+        // Update user credentials in Redux store
         dispatch(setCredentials(res));
         toast.success('Profile updated successfully');
       } catch (err: unknown) {
@@ -56,6 +63,7 @@ const ProfilePage = () => {
     }
   };
 
+  // Handle input changes by updating form state
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 

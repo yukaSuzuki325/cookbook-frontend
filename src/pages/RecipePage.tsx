@@ -8,9 +8,14 @@ import BookmarkButton from '../components/BookmarkButton.tsx';
 import ShareButton from '../components/ShareButton.tsx';
 
 const RecipePage = () => {
+  // Get the recipe ID from the route parameters
   const { id } = useParams();
   const recipeId = id ?? '';
+
+  // check for a state prop in useLocation to determine if a refetch is required
   const { state } = useLocation();
+
+  // Fetch the recipe by ID using RTK Query
   const {
     data: recipe,
     isLoading,
@@ -18,6 +23,7 @@ const RecipePage = () => {
     refetch,
   } = useGetRecipeByIdQuery(recipeId);
 
+  // Optionally refetch the recipe if the page was navigated to with { state: { refetch: true } }
   useEffect(() => {
     if (state?.refetch) {
       refetch();

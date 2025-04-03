@@ -10,8 +10,6 @@ const HomePage = () => {
   const [category, setCategory] = useState<CategoryType>('All');
   const [searchQuery, setSearchQuery] = useState('');
 
-  console.log(recipes[0]);
-
   // Filter recipes by category and search query
   const filteredRecipes = recipes.filter((recipe) => {
     const matchesCategory = category === 'All' || recipe.category === category;

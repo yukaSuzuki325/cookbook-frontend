@@ -2,26 +2,7 @@ import { FiPlus } from 'react-icons/fi';
 import IconButton from './IconButton.tsx';
 import FormInput from './FormInput.tsx';
 import ActionButton from './ActionButton.tsx';
-
-export interface Ingredient {
-  name: string;
-  quantity: string;
-}
-
-export interface RecipeStep {
-  stepNumber: number;
-  instruction: string;
-}
-
-export interface RecipeFormData {
-  title: string;
-  description: string;
-  cookingTime: number;
-  servings: number;
-  category: string;
-  imageUrl: string;
-  steps: string | RecipeStep[];
-}
+import { IngredientWithoutId, RecipeFormData } from '../types/recipeTypes.ts';
 
 interface RecipeFormProps {
   pageTitle: string;
@@ -29,8 +10,8 @@ interface RecipeFormProps {
   setFormData: React.Dispatch<
     React.SetStateAction<RecipeFormProps['formData']>
   >;
-  ingredients: Ingredient[];
-  setIngredients: React.Dispatch<React.SetStateAction<Ingredient[]>>;
+  ingredients: IngredientWithoutId[];
+  setIngredients: React.Dispatch<React.SetStateAction<IngredientWithoutId[]>>;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   isLoading: boolean;
   buttonText: string;
@@ -57,7 +38,7 @@ const RecipeForm = ({
 
   const handleIngredientChange = (
     index: number,
-    field: keyof Ingredient,
+    field: keyof IngredientWithoutId,
     value: string
   ) => {
     let updatedIngredients = [...ingredients];

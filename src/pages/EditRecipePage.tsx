@@ -6,7 +6,8 @@ import {
 import { useParams, useNavigate } from 'react-router-dom';
 import { handleRecipeSubmit } from '../utils/recipeHelpers.ts';
 import LoadingPage from '../components/LoadingPage.tsx';
-import RecipeForm, { type RecipeFormData } from '../components/RecipeForm.tsx';
+import RecipeForm from '../components/RecipeForm.tsx';
+import { RecipeFormData } from '../types/recipeTypes.ts';
 
 const EditRecipePage = () => {
   // Get the recipe ID from the URL parameters

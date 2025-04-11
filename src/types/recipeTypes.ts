@@ -4,10 +4,24 @@ export interface Ingredient {
   quantity: string;
 }
 
+export type IngredientWithoutId = Omit<Ingredient, '_id'>;
+
 export interface Step {
   _id: string;
   stepNumber: string;
   instruction: string;
+}
+
+export type StepWithoutId = Omit<Step, '_id'>;
+
+export interface RecipeFormData {
+  title: string;
+  description: string;
+  cookingTime: number;
+  servings: number;
+  category: string;
+  imageUrl: string;
+  steps: string | StepWithoutId[];
 }
 
 export interface Recipe {

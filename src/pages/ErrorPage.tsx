@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { useRouteError } from 'react-router-dom';
+import ActionButton from '../components/ActionButton';
 
 interface ErrorResponse {
   status?: number;
@@ -28,12 +29,9 @@ const ErrorPage = () => {
       <h1 className="text-4xl font-bold mb-4">Something went wrong!</h1>
       <p className="text-gray-600 mb-6">Oops! An unexpected error occurred.</p>
       {errorMessage}
-      <button
-        onClick={() => (window.location.href = '/')}
-        className="mt-4 px-6 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
-      >
+      <ActionButton onClick={() => (window.location.href = '/')}>
         Go Back to Home
-      </button>
+      </ActionButton>
     </div>
   );
 };

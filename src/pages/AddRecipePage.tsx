@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useCreateRecipeMutation } from '../features/api/recipesApiSlice.ts';
 import { useNavigate } from 'react-router-dom';
-import RecipeForm, { RecipeFormData } from '../components/RecipeForm.tsx';
+import RecipeForm from '../components/RecipeForm.tsx';
+import { RecipeFormData } from '../types/recipeTypes.ts';
 import { handleRecipeSubmit } from '../utils/recipeHelpers.ts';
 
 const AddRecipePage = () => {

@@ -66,10 +66,7 @@ const Navbar = () => {
           </button>
 
           {isDropdownOpen && (
-            <DropdownMenu
-              isDropdownOpen={isDropdownOpen}
-              setIsDropdownOpen={setIsDropdownOpen}
-            />
+            <DropdownMenu setIsDropdownOpen={setIsDropdownOpen} />
           )}
         </div>
       </div>

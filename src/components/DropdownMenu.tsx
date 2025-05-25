@@ -5,14 +5,10 @@ import { useLogoutUserMutation } from '../features/api/usersApiSlice.ts';
 import { removeCredentials } from '../features/auth/authSlice.ts';
 
 interface DropdownMenuProps {
-  isDropdownOpen: boolean;
   setIsDropdownOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const DropdownMenu = ({
-  isDropdownOpen,
-  setIsDropdownOpen,
-}: DropdownMenuProps) => {
+const DropdownMenu = ({ setIsDropdownOpen }: DropdownMenuProps) => {
   const { userInfo } = useAuthSelector((store) => store.auth);
   const navigate = useNavigate();
   const dispatch = useAuthDispatch();
